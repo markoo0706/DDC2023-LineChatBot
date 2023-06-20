@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage,LocationSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage, LocationSendMessage
 
 #line token
 channel_access_token = 'fkoo8cmH1C29XiX7vKOqcXa3fJ5wpcHDZkkMw9Y6v7sxhIeT2QZW/VoE1legG4KY6ZaxTXjgtjKc9M9hyZ6oI+KlGbyUUQejNB17GKyMNrQcMwEHpSq7kI0ibsYn6bZO33jExHJ30qGPd+cXp8G6tgdB04t89/1O/w1cDnyilFU='
@@ -34,11 +34,11 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):    
-        lat = event.message.latitude
-        long = event.message.longtitude
-        add = event.message.address
-        msg = f"親愛的用戶您好，以下是您的位置資訊：\n緯度：{lat}\n經度：{long}\n地址：{add}" # 回傳訊息
-        message = TextSendMessage(text = msg)
+        # lat = event.message.latitude
+        # long = event.message.longtitude
+        # add = event.message.address
+        # msg = f"親愛的用戶您好，以下是您的位置資訊：\n緯度：{lat}\n經度：{long}\n地址：{add}" # 回傳訊息
+        message = TextSendMessage(text = 'haha')
         line_bot_api.reply_message(event.reply_token,message)
 
 @app.route('/', methods=['GET'])
