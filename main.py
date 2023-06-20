@@ -40,7 +40,9 @@ def handle_message(event):
         msg = f"親愛的用戶您好，以下是您的位置資訊：\n緯度：{lat}\n經度：{long}\n地址：{add}" # 回傳訊息
         message = TextSendMessage(text = msg)
         line_bot_api.reply_message(event.reply_token,message)
-
+@app.route('/', methods=['GET'])
+def home():
+    return "<h1>Hello!</h1>"
 
 import os
 if __name__ == "__main__":
