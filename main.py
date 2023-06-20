@@ -34,11 +34,11 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):    
-        # lat = event.message.latitude
-        # long = event.message.longtitude
-        # add = event.message.address
-        # msg = f"親愛的用戶您好，以下是您的位置資訊：\n緯度：{lat}\n經度：{long}\n地址：{add}" # 回傳訊息
-        message = TextSendMessage(text = 'haha')
+        lat = event.message.latitude
+        long = event.message.longtitude
+        add = event.message.address
+        # msg = "親愛的用戶您好，以下是您的位置資訊：\n緯度：{lat}\n經度：{long}\n地址：{add}" # 回傳訊息
+        message = TextSendMessage(text = str(add))
         line_bot_api.reply_message(event.reply_token,message)
 
 @app.route('/', methods=['GET'])
