@@ -111,8 +111,8 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):    
-        # message = TextSendMessage(text = '收到位置訊息')
-        line_bot_api.reply_message(event.reply_token, event.message)
+        message = TextSendMessage(text = '收到位置訊息')
+        line_bot_api.reply_message(event.reply_token, message)
         # buttons_template_message = TemplateSendMessage(
         #                             alt_text='ButtonsTemplate',
         #                             template=ButtonsTemplate(
