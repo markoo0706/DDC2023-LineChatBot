@@ -3,6 +3,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage,LocationSendMessage,TemplateSendMessage,ButtonsTemplate,URITemplateAction,PostbackAction,MessageAction,URIAction,CarouselTemplate,CarouselColumn,ImageCarouselTemplate,ImageCarouselColumn
+from placeInfo import findRestaurant
 
 
 #line token
@@ -113,7 +114,10 @@ def handle_text_message(event):
 def handle_loc_message(event):   
         lat = event.message.latitude
         long = event.message.longitude
-        print(lat)
+        # 1. 經緯度位置轉天氣
+        # 2. 天氣轉推薦類別(Chatgbt, 推薦系統)
+        # 3. 推薦類別轉 Button Template 輸出
+        # restaurant_info = findRestaurant(lat, long) # 根據經、緯度獲取附近餐廳名單(Dict)
         # message = TextSendMessage(text = "獲取位置資訊")
         # line_bot_api.reply_message(event.reply_token, message)
         buttons_template_message = TemplateSendMessage(
@@ -124,8 +128,16 @@ def handle_loc_message(event):
                                         text='沒事多吃飯',
                                         actions=[
                                             MessageAction(
-                                                label='查看Queencard',
-                                            text='Queencard'
+                                                label= '日式餐廳',
+                                            text= '日式餐廳'
+                                            ),
+                                            MessageAction(
+                                                label='泰式餐廳',
+                                            text='泰式餐廳'
+                                            ),
+                                            MessageAction(
+                                                label= '義式餐廳',
+                                            text= '義式餐廳'
                                             ),
                                             URIAction(
                                                 label='前往Queencard',
