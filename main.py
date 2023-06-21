@@ -110,29 +110,31 @@ def handle_text_message(event):
          
 
 @handler.add(MessageEvent, message=LocationMessage)
-def handle_loc_message(event):    
-        # message = TextSendMessage(text = '收到位置訊息')
-        # line_bot_api.reply_message(event.reply_token, message)
-        buttons_template_message = TemplateSendMessage(
-                                    alt_text='ButtonsTemplate',
-                                    template=ButtonsTemplate(
-                                        thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1654412348946.jpg',
-                                        title='選擇餐廳類型',
-                                        text='沒事多吃飯',
-                                        actions=[
-                                            MessageAction(
-                                                label='查看Queencard',
-                                            text='Queencard'
-                                            ),
-                                            URIAction(
-                                                label='前往Queencard',
-                                                uri='https://www.youtube.com/watch?v=UhD8-HYw13A'
-                                            )
-                                        ]
-                                    )
-                                )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
-        return 
+def handle_loc_message(event):   
+        lat = event["message"]["latitude"]
+        long = event["message"]["longitude"]
+        message = TextSendMessage(text = str(lat))
+        line_bot_api.reply_message(event.reply_token, message)
+        # buttons_template_message = TemplateSendMessage(
+        #                             alt_text='ButtonsTemplate',
+        #                             template=ButtonsTemplate(
+        #                                 thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1654412348946.jpg',
+        #                                 title='選擇餐廳類型',
+        #                                 text='沒事多吃飯',
+        #                                 actions=[
+        #                                     MessageAction(
+        #                                         label='查看Queencard',
+        #                                     text='Queencard'
+        #                                     ),
+        #                                     URIAction(
+        #                                         label='前往Queencard',
+        #                                         uri='https://www.youtube.com/watch?v=UhD8-HYw13A'
+        #                                     )
+        #                                 ]
+        #                             )
+        #                         )
+        # line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        # return 
 
 import os
 if __name__ == "__main__":
