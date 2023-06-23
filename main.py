@@ -239,6 +239,36 @@ def handle_text_message(event):
                                 text='地圖'
                             ),
                         ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title='餐廳 3',
+                        text='說明文字 3',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title='餐廳 4',
+                        text='說明文字 4',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
                     )
                 ]
             )
@@ -260,8 +290,6 @@ def handle_text_message(event):
                                     )
                                 )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-
-
     else:
         msg= event.message.text
         message = TextSendMessage(text=msg)
