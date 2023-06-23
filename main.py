@@ -46,90 +46,7 @@ def handle_text_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == "義式料理": 
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template=CarouselTemplate(
-                columns=[
-                    CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title= '亞廬義大利窯烤吃到飽餐廳',
-                        text= '106台灣台北市大安区基隆路二段270號2樓',
-                        actions=[
-                            PostbackAction(
-                                label='收藏名單',
-                                data= '亞廬義大利窯烤吃到飽餐廳',
-                            ),
-                            MessageAction(
-                                label='打開地圖',
-                                text = '地圖'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title= '月之義大利餐廳',
-                        text= '106台灣台北市大安區敦化南路二段265巷3號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏名單',
-                                data= '月之義大利餐廳'
-                            ),
-                            MessageAction(
-                                label='打開地圖',
-                                text='地圖'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title= '蘇活義大利麵坊',
-                        text= '106台灣台北市大安區新生南路三段60巷3號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏名單',
-                                data= '蘇活義大利麵坊',
-                            ),
-                            MessageAction(
-                                label='打開地圖',
-                                text = '地圖'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title= '卡帛素食烘培‧義式廚房‧港式餐點 總店',
-                        text= '106台灣台北市大安區復興南路二段308巷5號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏名單',
-                                data= '卡帛素食烘培‧義式廚房‧港式餐點 總店',
-                            ),
-                            MessageAction(
-                                label='打開地圖',
-                                text = '地圖'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title= 'ANTICO FORNO 老烤箱義式披薩餐酒',
-                        text= '106台灣台北市大安區瑞安街141號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏名單',
-                                data= '亞廬義大利窯烤吃到飽餐廳',
-                            ),
-                            MessageAction(
-                                label='打開地圖',
-                                text = '地圖'
-                            ),
-                        ]
-                    )
-                ]
-            )
-        )
-    elif event.message.text == "日式料理":
+    elif event.message.text == "義式料理":
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
             template=CarouselTemplate(
@@ -163,19 +80,11 @@ def handle_text_message(event):
                                 text='地圖'
                             ),
                         ]
-                    )
-                ]
-            )
-        )
-    elif event.message.text == "中式料理":
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template=CarouselTemplate(
-                columns=[
+                    ),
                     CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title='餐廳 1',
-                        text='說明文字 1',
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title='餐廳 3',
+                        text='說明文字 3',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -189,8 +98,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 2',
-                        text='說明文字 2',
+                        title='餐廳 4',
+                        text='說明文字 4',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -205,6 +114,7 @@ def handle_text_message(event):
                 ]
             )
         )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.message.text == "其他類別":
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
