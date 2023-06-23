@@ -115,6 +115,144 @@ def handle_text_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
+    elif event.message.text == "中式料理":
+        buttons_template_message = TemplateSendMessage(
+            alt_text='CarouselTemplate',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
+                        title='莫宰羊-大安台大店',
+                        text= '106台灣台北市大安區新生南路三段28號',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                         title= '小李子清粥小菜',
+                        text= '106台灣台北市大安區復興南路二段142之1號',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title= '北平同慶樓',
+                        text= '106台灣台北市大安區敦化南路二段168號',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title= '阿玉水餃 (生水餃專賣店)',
+                        text= '106台灣台北市大安區辛亥路二段217號',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+    elif event.message.text == "日式料理":
+        buttons_template_message = TemplateSendMessage(
+            alt_text='CarouselTemplate',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
+                        title= '鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO',
+                        text= '106台灣台北市大安區敦化南路二段265巷13號',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                         title= 'ibuki 日本料理餐廳 -台北遠東香格里拉',
+                        text= '106台灣台北市大安区敦化南路二段201號7樓',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title= '禾豐日式涮涮鍋',
+                        text= '106台灣台北市大安區復興南路二段148巷16號1樓',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title= '角屋關東煮',
+                        text= '106台灣台北市大安區大安路二段141巷',
+                        actions=[
+                            PostbackAction(
+                                label='收藏',
+                                data='收藏'
+                            ),
+                            MessageAction(
+                                label='打開地圖',
+                                text='地圖'
+                            ),
+                        ]
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.message.text == "其他類別":
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
@@ -122,8 +260,8 @@ def handle_text_message(event):
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title='餐廳 1',
-                        text='說明文字 1',
+                        title= 'the Diner 樂子瑞安店',
+                        text= '106台灣台北市大安區瑞安街145號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -137,8 +275,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 2',
-                        text='說明文字 2',
+                        title='遠東CAFÉ',
+                        text= '106台灣台北市大安區和平東路三段60號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -152,8 +290,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 3',
-                        text='說明文字 3',
+                        title='Onni韓食堂',
+                        text='106台灣台北市大安區復興南路二段173號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -167,8 +305,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 4',
-                        text='說明文字 4',
+                        title='找餐。店',
+                        text='106台灣台北市大安區和平東路三段1巷6-3號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
