@@ -53,8 +53,8 @@ def handle_text_message(event):
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
-                        title='餐廳 1',
-                        text='說明文字 1',
+                        title='亞廬義大利窯烤吃到飽餐廳',
+                        text= '106台灣台北市大安区基隆路二段270號2樓',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -68,8 +68,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 2',
-                        text='說明文字 2',
+                         title= '月之義大利餐廳',
+                        text= '106台灣台北市大安區敦化南路二段265巷3號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -83,8 +83,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 3',
-                        text='說明文字 3',
+                        title= '蘇活義大利麵坊',
+                        text= '106台灣台北市大安區新生南路三段60巷3號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
@@ -98,8 +98,8 @@ def handle_text_message(event):
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
-                        title='餐廳 4',
-                        text='說明文字 4',
+                        title= '卡帛素食烘培‧義式廚房‧港式餐點 總店',
+                        text= '106台灣台北市大安區復興南路二段308巷5號',
                         actions=[
                             PostbackAction(
                                 label='收藏',
