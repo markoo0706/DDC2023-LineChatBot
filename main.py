@@ -15,18 +15,57 @@ handler = WebhookHandler(channel_secret)
 
 app = Flask(__name__)
 
+# 經緯度，可跟據LocationMessage獲得
+lat = 25.020859 
+lng = 121.542776
+
+df = findRestaurant(lat, lng)
+
 # 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
+def getType(loc, lat):
+    # /...串接ChatGbt獲得推薦類別的函數，待修改。
+    type1 = "義式料理"
+    type2 = "中式料理"
+    type3 = "日式料理" 
+    return type1, type2, type3
 
-resType1 = "日式料理" # Ex. xx料理
-resType2 = "中式料理" 
-resType3 = "義式料理" 
+resType1, resType2, resType3 = getType(25.020859, 121.542776)
 
-# 套用某函數並根據resType從資料庫中抓取相對應的資料
-resInfo1 = list()
-resInfo2 = list()
-resInfo3 = list()
+
+# 套用函數並根據resType從資料庫中抓取相對應的資料
+
+resname = [i for i in df.keys()]
+resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '蘇活義大利麵坊', '卡帛素食烘培‧義式廚房‧港式餐點 總店', 'ANTICO FORNO 老烤箱義式披薩餐酒']
+resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶樓', '阿玉水餃 (生水餃專賣店)', '紅豆食府 遠企店', '恬園餐廳 - 福華國際文教會館', '溫州大餛飩', '涮八方紫銅鍋' '瑞安豆漿大王' '阿英海產粥', '蔣記家薌麵', '熱翻天生猛海鮮', '忠誠山東蔥油餅 - 此燈亮有餅', '小李子蘭州牛肉拉麵館', '大連風味館', '龍門客棧餃子館 瑞安店', '老龍牛肉麵大王', '花麻辣 麻辣鴛鴦 沙茶火鍋', '小辣椒魷魚羹', '三顧茅廬台北四維店', '八方雲集 (師院店)', '通化街米粉湯50年老店（胡記復興旗艦店）','鳳城燒臘粵菜']
+resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
+otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
+
+# 自動生成 carousel＿columns的 函數
+def generate_carousel(resInfo):
+    carousel_columns = []
+    for res in resInfo:
+        # 根据需要设置每个 Carousel Column 的属性
+        column = CarouselColumn(
+            thumbnail_image_url= df[res]['photo_refernce'],
+            title='res' + str(df[res]['rating']),
+            text= df[res]['address'],
+            actions=[   PostbackAction(
+                            label='收藏',
+                            display_text ='您已收藏了: ' + res,
+                            data = res
+                        ),
+                        URIAction(
+                                label='打開地圖',
+                                uri='https://www.google.com/maps/place/?q=place_id:' + df[res]['place_id']
+                        ),
+                        ]  # 设置按钮或其他操作
+        )
+        carousel_columns.append(column)
+    carousel_template = CarouselTemplate(columns=carousel_columns)
+    return carousel_template
 
 # 監聽所有來自 /callback 的 Post Request
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -58,77 +97,10 @@ def handle_text_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == "義式料理":
+    elif event.message.text == resType1:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
-            template=CarouselTemplate(
-                columns=[
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0ku_x7kvNmUyoAUNEllRYbn0pFkOaYYFsSic77ogtwi5aky-g5rCmhwoi5V9ohPShpceg8xDkbbp9FYv6YZnuAOzxLm71N_qFAvZJITpy6-bGQOSIlnqWhXIl2xtgWLs_fR6-2YnwMVHTlrIM4ye-r_e_chOv3CI1oczZnos7MoCROR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title='亞廬義大利窯烤吃到飽餐廳(4.3)',
-                        text= '106台灣台北市大安区基隆路二段270號2樓',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                display_text ='您已收藏了: ' + '亞廬義大利窯烤吃到飽餐廳',
-                                data = '亞廬義大利窯烤吃到飽餐廳'
-                            ),
-                           URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJCVUzyjGqQjQR4-f5c8-keGc'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0n18FbrWHwJI34xiMtkKrB-rsNWMemgLE0F-5icbUMsBAnDw9ph9sNgKquFei5NaRQQX1btW-MYw7M4ofhF7gVbKQYnrL-ct4Kx-ZQm-XsBnaPSsLDTW82a-33LzpycStDILs9BtWT-NPf7KyLKc__-6nvZDK8XYI4xJRD8MYGl9JtB&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                         title= '月之義大利餐廳(4.4)',
-                        text= '106台灣台北市大安區敦化南路二段265巷3號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                display_text ='您已收藏了: ' + '月之義大利餐廳',
-                                data = '月之義大利餐廳'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJw3tHETKqQjQR_s7m4QZEEBY'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title= '蘇活義大利麵坊(4.2)',
-                        text= '106台灣台北市大安區新生南路三段60巷3號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                display_text ='您已收藏了: ' + '蘇活義大利麵坊',
-                                data = '蘇活義大利麵坊'
-                            ),
-                           URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJtde7A4mpQjQR3cag3SFcF7c'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0lYl8dunk2iC4bHZVOYjfUcXVArBtBJ11Pe9pcschyOZizT6pHSirz70RTTCxoHZ2FW1_bfA6ci0Pv8hiQqBOkD3d1UqcNoL9i0cmBWoB-6ShNPj3T9KRsI2iRTkJuazuuhGy-i0YYAhWbvcnqePoas-5EE7ZOs6_auCKGQm5mX-hjy&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title= '卡帛素食烘培‧義式廚房‧港式餐點 總店(4.2)',
-                        text= '106台灣台北市大安區復興南路二段308巷5號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                display_text ='您已收藏了: ' + '卡帛素食烘培‧義式廚房‧港式餐點 總店',
-                                data = '卡帛素食烘培‧義式廚房‧港式餐點 總店'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJuWw81C6qQjQRD7lOTyFReqs'
-                            ),
-                        ]
-                    )
-                ]
-            )
+            template = generate_carousel(resInfo1)
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.message.text == resType2:
@@ -204,7 +176,7 @@ def handle_text_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == resType1:
+    elif event.message.text == resType3:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
             template=CarouselTemplate(
