@@ -156,7 +156,7 @@ def handle_text_message(event):
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
                                     template=ButtonsTemplate(
-                                        thumbnail_image_url='https://img.istreetview.com/?id=h4NFkQY=&url=3cRltBdhUaYc2lJ275Ez4NhqjMmC+vaqAQ4m3zXbsrDDGm94YNcv67oTZnzV1ccNAOLakCUp5IXDHjrlsvBxpfOF5H3O1EFp2HhJTg==',
+                                        thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
                                         title='餐廳類型',
                                         text='請選擇餐廳類型',
                                         actions=[
@@ -203,7 +203,7 @@ def handle_loc_message(event):
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
                                     template=ButtonsTemplate(
-                                        thumbnail_image_url='https://img.istreetview.com/?id=h4NFkQY=&url=3cRltBdhUaYc2lJ275Ez4NhqjMmC+vaqAQ4m3zXbsrDDGm94YNcv67oTZnzV1ccNAOLakCUp5IXDHjrlsvBxpfOF5H3O1EFp2HhJTg==',
+                                        thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
                                         title='餐廳類型',
                                         text='請選擇餐廳類型',
                                         actions=[
