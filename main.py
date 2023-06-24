@@ -17,6 +17,7 @@ handler = WebhookHandler(channel_secret)
 
 # 經緯度，可跟據LocationMessage獲得
 # 預設位置
+
 lat = 25.020859 
 lng = 121.542776
 df = findRestaurant(lat, lng) 
@@ -179,7 +180,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return 
     elif event.message.text == "收藏名單":
-        msg = "收藏名單：\n1. 莫宰羊-大安台大店\n2. 亞廬義大利窯烤吃到飽餐廳\n3. 遠東CAFÉ"
+        msg = "收藏名單：\n1. 莫宰羊-大安台大店\n2. 亞廬義大利窯烤吃到飽餐廳\n3. 遠東CAFÉ\n4. 詹記麻辣火鍋 敦南店"
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
     else:
@@ -224,7 +225,7 @@ def handle_loc_message(event):
                                     )
                                 )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-        return 
+        return
 
 @handler.add(PostbackAction) # 監聽PostBackAciton
 
