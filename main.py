@@ -179,6 +179,18 @@ def handle_text_message(event):
                                 text='地圖'
                             ),
                         ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        title= '其他選項',
+                        text= '返回列表',
+                        actions=[
+                            
+                            MessageAction(
+                                label='返回列表',
+                                text='返回列表'
+                            ),
+                        ]
                     )
                 ]
             )
@@ -201,7 +213,7 @@ def handle_text_message(event):
                             MessageAction(
                                 label='打開地圖',
                                 text='地圖'
-                            ),
+                            )
                         ]
                     ),
                     CarouselColumn(
@@ -216,7 +228,7 @@ def handle_text_message(event):
                             MessageAction(
                                 label='打開地圖',
                                 text='地圖'
-                            ),
+                            )
                         ]
                     ),
                     CarouselColumn(
