@@ -97,12 +97,14 @@ def handle_text_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
+    
     elif event.message.text == resType1:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
             template = generate_carousel(resInfo1)
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
+
     elif event.message.text == resType2:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
