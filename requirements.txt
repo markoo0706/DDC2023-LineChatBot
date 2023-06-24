@@ -4,4 +4,4 @@ pymongo
 pandas
 requests
 googlemaps
-sklearn
+scikit-learn
