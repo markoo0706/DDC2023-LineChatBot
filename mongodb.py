@@ -2,16 +2,16 @@ import pymongo
 import pandas as pd
 
 
-# myclient = pymongo.MongoClient('mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774')
+myclient = pymongo.MongoClient('mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774')
  
-# mydb = myclient['userDB']
-# record_col = mydb["record"] # 餐廳紀錄 Collection
-# favorite_col = mydb["favorite"] # 收藏名單 Collection
-# rest_col = mydb["restaurant"] # 餐廳資料 Collection
+mydb = myclient['userDB']
+record_col = mydb["record"] # 餐廳紀錄 Collection
+favorite_col = mydb["favorite"] # 收藏名單 Collection
+rest_col = mydb["restaurant"] # 餐廳資料 Collection
 
 # 測試
-# df = pd.read_pickle("data.pkl")
-# rest_name = [i for i in df]
+df = pd.read_pickle("data.pkl")
+rest_name = [i for i in df]
 
 # def add_res_db():
 #     for res in rest_name:
