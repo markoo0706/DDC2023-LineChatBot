@@ -7,7 +7,9 @@ class myDB():
         self.DBclient = str(client)
         self.DB = pymongo.MongoClient(client)
     
-
+lat = 25.020859 
+lng = 121.542776
+df = findRestaurant(lat, lng)
 
 
 myclient = pymongo.MongoClient('mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774')
@@ -16,6 +18,19 @@ mydb = myclient['userDB']
 record_col = mydb["record"] # 餐廳紀錄 Collection
 favorite_col = mydb["favorite"] # 收藏名單 Collection
 rest_col = mydb["restaurant"] # 餐廳資料 Collection
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 測試
 df = pd.read_pickle("data.pkl")
