@@ -47,7 +47,7 @@ def generate_carousel(resInfo):
         # 根据需要设置每个 Carousel Column 的属性
         column = CarouselColumn(
             thumbnail_image_url= df[res]['photo_refernce'],
-            title='res' + str(df[res]['rating']),
+            title= res + str(df[res]['rating']),
             text= df[res]['address'],
             actions=[   PostbackAction(
                             label='收藏',
