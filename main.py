@@ -82,7 +82,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title= '蘇活義大利麵坊(4.2)',
                         text= '106台灣台北市大安區新生南路三段60巷3號',
                         actions=[
