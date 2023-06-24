@@ -78,4 +78,3 @@ def findRestaurant(lat, lng):
       pass
   return restaurant_INFO
 
-print(findRestaurant(25.020859, 121.542776))

@@ -108,7 +108,7 @@ class Recommendation():
     similar_users = ordered_similarities.index[1:self.largest_similar_user_num]
     return similar_users
 
-  def similarUsersExperiencedRestaurant(self, histiry_df, similar_users, restaurant_list):
+  def similarUsersExperiencedRestaurant(self, history_df, similar_users, restaurant_list):
     waitlist = {}
     # 相似使用者的df
     similar_user_history_df = history_df.loc[similar_users]
