@@ -36,6 +36,7 @@ mongoDB_key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
 # ========================================= App ========================================= 
 
 app = Flask(__name__)
+app.config["JSON_AS_ASCII"] = False
 
 
 # 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
@@ -94,6 +95,7 @@ def generate_carousel(resInfo):
 # 監聽所有來自 /callback 的 Post Request
 
 @app.route("/callback", methods=['POST'])
+
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
