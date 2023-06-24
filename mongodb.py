@@ -76,4 +76,4 @@ def Test(): # 測試函數
     mydb.delete_collection("restaruant")
     mydb.delete_collection("favorite")
 
-Test()
+# Test()
