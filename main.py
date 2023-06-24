@@ -52,7 +52,7 @@ def handle_text_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo.jpg',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0ku_x7kvNmUyoAUNEllRYbn0pFkOaYYFsSic77ogtwi5aky-g5rCmhwoi5V9ohPShpceg8xDkbbp9FYv6YZnuAOzxLm71N_qFAvZJITpy6-bGQOSIlnqWhXIl2xtgWLs_fR6-2YnwMVHTlrIM4ye-r_e_chOv3CI1oczZnos7MoCROR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title='亞廬義大利窯烤吃到飽餐廳(4.3)',
                         text= '106台灣台北市大安区基隆路二段270號2樓',
                         actions=[
@@ -67,7 +67,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0ku_x7kvNmUyoAUNEllRYbn0pFkOaYYFsSic77ogtwi5aky-g5rCmhwoi5V9ohPShpceg8xDkbbp9FYv6YZnuAOzxLm71N_qFAvZJITpy6-bGQOSIlnqWhXIl2xtgWLs_fR6-2YnwMVHTlrIM4ye-r_e_chOv3CI1oczZnos7MoCROR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                          title= '月之義大利餐廳(4.4)',
                         text= '106台灣台北市大安區敦化南路二段265巷3號',
                         actions=[
@@ -82,7 +82,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title= '蘇活義大利麵坊(4.2)',
                         text= '106台灣台北市大安區新生南路三段60巷3號',
                         actions=[
@@ -97,7 +97,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://steam.oxxostudio.tw/download/python/line-template-message-demo2.jpg',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title= '卡帛素食烘培‧義式廚房‧港式餐點 總店(4.2)',
                         text= '106台灣台北市大安區復興南路二段308巷5號',
                         actions=[
