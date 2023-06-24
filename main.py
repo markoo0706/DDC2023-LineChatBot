@@ -67,7 +67,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0ku_x7kvNmUyoAUNEllRYbn0pFkOaYYFsSic77ogtwi5aky-g5rCmhwoi5V9ohPShpceg8xDkbbp9FYv6YZnuAOzxLm71N_qFAvZJITpy6-bGQOSIlnqWhXIl2xtgWLs_fR6-2YnwMVHTlrIM4ye-r_e_chOv3CI1oczZnos7MoCROR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0n18FbrWHwJI34xiMtkKrB-rsNWMemgLE0F-5icbUMsBAnDw9ph9sNgKquFei5NaRQQX1btW-MYw7M4ofhF7gVbKQYnrL-ct4Kx-ZQm-XsBnaPSsLDTW82a-33LzpycStDILs9BtWT-NPf7KyLKc__-6nvZDK8XYI4xJRD8MYGl9JtB&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                          title= '月之義大利餐廳(4.4)',
                         text= '106台灣台北市大安區敦化南路二段265巷3號',
                         actions=[
@@ -82,7 +82,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
+                        thumbnail_image_url='',
                         title= '蘇活義大利麵坊(4.2)',
                         text= '106台灣台北市大安區新生南路三段60巷3號',
                         actions=[
@@ -97,7 +97,7 @@ def handle_text_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kq5_u7EamjmZd0mAJhH-jBwziL7VLxHenUmhjllwYtVAOYlwtP4tO3sTcKSqr7VmqB1H-cxQEXTepOJjRXpqYPQXdwy4kfRZOL859OOVY_yULvRQDSgBM7AwgfwvptWtWLY5TGqI0ouowapexZ-p93Mti4JOYpdTtrAWunU_LryhYz&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
+                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0lYl8dunk2iC4bHZVOYjfUcXVArBtBJ11Pe9pcschyOZizT6pHSirz70RTTCxoHZ2FW1_bfA6ci0Pv8hiQqBOkD3d1UqcNoL9i0cmBWoB-6ShNPj3T9KRsI2iRTkJuazuuhGy-i0YYAhWbvcnqePoas-5EE7ZOs6_auCKGQm5mX-hjy&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title= '卡帛素食烘培‧義式廚房‧港式餐點 總店(4.2)',
                         text= '106台灣台北市大安區復興南路二段308巷5號',
                         actions=[
