@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage,LocationSendMessage,TemplateSendMessage,ButtonsTemplate,URITemplateAction,PostbackAction,MessageAction,URIAction,CarouselTemplate,CarouselColumn,ImageCarouselTemplate,ImageCarouselColumn
@@ -234,6 +234,39 @@ def add_favorite(event): # 收藏餐廳函數
      resName = event.post.data
     #  myDB.add_favo_rest(df, user_id, resName)
 
+@app.route('/athena', methods=["POST"])
+def athena():
+    # restaurant = request.get_data(as_text=True)
+    restaurant = request.get_json()
+    
+    recommend = restaurant['context']
+    recommend = recommend.split('},')
+    alist = []
+    for i in recommend:
+        d = dict()
+        if '{' in i:
+            i = i.replace('{','')
+        if '}' in i:
+            i = i.replace('}','')
+        for j in i.split(','):
+            d[j[:j.index(':')].strip()] = j[j.index(':')+1:]
+        alist.append(d)
+    mydict = dict()
+    for it in alist:
+        mydict[it['地點'].strip()] = it['推薦列表'].strip()
+
+    restaurant = restaurant['data']
+    for it in restaurant:
+        it['recommend'] = mydict[it['LocationName']]
+
+    global RECOMMEND_RESTAURANT
+    RECOMMEND_RESTAURANT = restaurant
+    
+    return {'user': restaurant}
+
+@app.route('/test', methods=['GET']) 
+def test():
+    return jsonify(RECOMMEND_RESTAURANT)
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
