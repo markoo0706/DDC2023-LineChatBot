@@ -70,7 +70,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '亞廬義大利窯烤吃到飽餐廳',
+                                data = '亞廬義大利窯烤吃到飽餐廳'
                             ),
                            URIAction(
                                 label='打開地圖',
@@ -85,7 +86,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '月之義大利餐廳',
+                                data = '月之義大利餐廳'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -100,7 +102,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '蘇活義大利麵坊',
+                                data = '蘇活義大利麵坊'
                             ),
                            URIAction(
                                 label='打開地圖',
@@ -115,7 +118,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '卡帛素食烘培‧義式廚房‧港式餐點 總店',
+                                data = '卡帛素食烘培‧義式廚房‧港式餐點 總店'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -139,7 +143,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '莫宰羊-大安台大店',
+                                data = '莫宰羊-大安台大店'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -154,7 +159,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '小李子清粥小菜',
+                                data = '小李子清粥小菜'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -169,7 +175,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '北平同慶樓',
+                                data = '北平同慶樓'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -184,7 +191,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '阿玉水餃',
+                                data = '阿玉水餃'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -208,7 +216,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO',
+                                data = '鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -223,7 +232,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + 'ibuki 日本料理餐廳 -台北遠東香格里拉',
+                                data = 'ibuki 日本料理餐廳 -台北遠東香格里拉'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -238,7 +248,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '禾豐日式涮涮鍋',
+                                data = '禾豐日式涮涮鍋'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -251,9 +262,10 @@ def handle_text_message(event):
                         title= '角屋關東煮(4.2)',
                         text= '106台灣台北市大安區大安路二段141巷',
                         actions=[
-                            PostbackAction(
+                           PostbackAction(
                                 label='收藏',
-                                data='收藏'
+                                display_text ='您已收藏了: ' + '角屋關東煮',
+                                data = '角屋關東煮'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -283,7 +295,7 @@ def handle_text_message(event):
                             URIAction(
                                 label='打開地圖',
                                 uri='https://www.google.com/maps/place/?q=place_id:ChIJvU5mgSmqQjQR0WhA_Zruk5E'
-                            ),
+                            )
                         ]
                     ),
                     CarouselColumn(
@@ -299,7 +311,7 @@ def handle_text_message(event):
                             URIAction(
                                 label='打開地圖',
                                 uri='https://www.google.com/maps/place/?q=place_id:ChIJeUp8ZTKqQjQREjxsd92csjg'
-                            ),
+                            )
                         ]
                     ),
                     CarouselColumn(
@@ -315,7 +327,7 @@ def handle_text_message(event):
                             URIAction(
                                 label='打開地圖',
                                 uri='https://www.google.com/maps/place/?q=place_id:ChIJU20RbCyqQjQRjgb82A26DQw'
-                            ),
+                            )
                         ]
                     ),
                     CarouselColumn(
@@ -331,29 +343,46 @@ def handle_text_message(event):
                            URIAction(
                                 label='打開地圖',
                                 uri='https://www.google.com/maps/place/?q=place_id:ChIJq4Cddi6qQjQRtSouaYEUL9c'
-                            ),
+                            )
                         ]
                     )
                 ]
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    # elif event.message.text == "地圖":
-    #     buttons_template_message = TemplateSendMessage(
-    #                                 alt_text='ButtonsTemplate',
-    #                                 template=ButtonsTemplate(
-    #                                     thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1625226724815.jpg',
-    #                                     title='前往地圖',
-    #                                     text='Google map',
-    #                                     actions=[
-    #                                         URIAction(
-    #                                             label='前往Queencard',
-    #                                             uri='https://www.youtube.com/watch?v=UhD8-HYw13A'
-    #                                         )
-    #                                     ]
-    #                                 )
-    #                             )
-    #     line_bot_api.reply_message(event.reply_token, buttons_template_message)
+    elif event.message.text == "返回選單":
+        buttons_template_message = TemplateSendMessage(
+                                    alt_text='ButtonsTemplate',
+                                    template=ButtonsTemplate(
+                                        thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1654412348946.jpg',
+                                        title='餐廳類型',
+                                        text='請選擇餐廳類型',
+                                        actions=[
+                                            MessageAction(
+                                                label= '日式料理',
+                                                text= '日式料理'
+                                            ),
+                                            MessageAction(
+                                                label='義式料理',
+                                                text='義式料理'
+                                            ),
+                                            MessageAction(
+                                                label ='中式料理',
+                                                text = '中式料理'
+                                            ),
+                                            MessageAction(
+                                                label = "其他類別",
+                                                text = "其他類別"
+                                            )
+                                        ]
+                                    )
+                                )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        return 
+    elif event.message.text == "收藏名單":
+        msg = "收藏名單：\n1. 莫宰羊-大安台大店\n2. 亞廬義大利窯烤吃到飽餐廳\n3. 遠東CAFÉ"
+        message = TextSendMessage(text=msg)
+        line_bot_api.reply_message(event.reply_token,message)
     else:
         msg= event.message.text
         message = TextSendMessage(text=msg)

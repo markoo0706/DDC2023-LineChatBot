@@ -100,4 +100,5 @@ def test_favorite():
 # test_record()
 # test_favorite()
 
-
+add_favrite(1234, "找餐。店")
+print(mydb["favorite"].find_one())
