@@ -43,8 +43,9 @@ otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
 # 自動生成 carousel＿columns的 函數
 def generate_carousel(resInfo):
     carousel_columns = []
+    sugNum = 0
     for res in resInfo:
-        if res >= 9:
+        if sugNum >= 9:
             break
         # 根据需要设置每个 Carousel Column 的属性
         column = CarouselColumn(
@@ -63,6 +64,7 @@ def generate_carousel(resInfo):
                         ]  # 设置按钮或其他操作
         )
         carousel_columns.append(column)
+        sugNum += 1
     carousel_template = CarouselTemplate(columns=carousel_columns)
     return carousel_template
 
