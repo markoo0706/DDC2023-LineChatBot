@@ -44,6 +44,8 @@ otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
 def generate_carousel(resInfo):
     carousel_columns = []
     for res in resInfo:
+        if res >= 9:
+            break
         # 根据需要设置每个 Carousel Column 的属性
         column = CarouselColumn(
             thumbnail_image_url= df[res]['photo_refernce'],
