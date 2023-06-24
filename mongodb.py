@@ -27,6 +27,27 @@ class mongoDB():
                     "review" : df[resName]["review"]
                 })
         return
+    # 把收藏餐廳丟入收藏資料庫
+    def add_favo_rest(self, df, userId, resName):
+        query = {'resName': resName, "user" : userId}
+        existing_document  = self.DB["favorite"].find_one(query)
+        if not existing_document: # 若不在資料庫中
+            self.DB["favorite"].insert_one({
+                    "resName" : resName,
+                    "user" : userId,
+                    "place_id" : df[resName]["place_id"],
+                    "lat" : df[resName]["lat"],
+                    "lng" : df[resName]["lng"],
+                    "address" : df[resName]["address"],
+                    "rating" : df[resName]["rating"]
+                })
+        return
+    def show_favo_rest(self, userId): 
+        query = {"user" : userId}
+        existing_document  = self.DB["favorite"].find_many(query)
+
+
+
     def delete_user_info(self, userId):
         return
     def delete_res_info(self, colName, resName):
@@ -51,6 +72,8 @@ def Test(): # 測試函數
     for resName in [i for i in df.keys()]:
         mydb.add_rest_info("restaruant", df, resName)
     mydb.show_colleciton("restaruant")
+    
     mydb.delete_collection("restaruant")
+    mydb.delete_collection("favorite")
 
 Test()

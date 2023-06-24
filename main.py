@@ -28,10 +28,10 @@ resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
 mongoDB_key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
 
 # 連接 mongoDB 資料庫 
-myDB = mongoDB(mongoDB_key)
+# myDB = mongoDB(mongoDB_key)
 # 把抓取資料丟入餐廳資料庫 (Merge)
-for resName in [i for i in df.keys()]:
-    myDB.add_rest_info("restaruant", df, resName)
+# for resName in [i for i in df.keys()]:
+#     myDB.add_rest_info("restaruant", df, resName)
 
 # ========================================= App ========================================= 
 
@@ -232,7 +232,7 @@ def handle_loc_message(event):
 def add_favorite(event): # 收藏餐廳函數
      user_id = event.source.user_id
      resName = event.post.data
-     add_favorite(user_id, resName)
+    #  myDB.add_favo_rest(df, user_id, resName)
 
 import os
 if __name__ == "__main__":
