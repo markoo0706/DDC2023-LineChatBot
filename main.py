@@ -60,9 +60,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                           URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJCVUzyjGqQjQR4-f5c8-keGc'
                             ),
                         ]
                     ),
@@ -75,9 +75,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJw3tHETKqQjQR_s7m4QZEEBY'
                             ),
                         ]
                     ),
@@ -90,9 +90,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                           URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJtde7A4mpQjQR3cag3SFcF7c'
                             ),
                         ]
                     ),
@@ -105,9 +105,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJuWw81C6qQjQRD7lOTyFReqs'
                             ),
                         ]
                     )
@@ -129,9 +129,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJ3xl5zIepQjQRGNQknIunDIs'
                             ),
                         ]
                     ),
@@ -144,9 +144,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJ4yt0hyyqQjQRA905QCvA3O4'
                             ),
                         ]
                     ),
@@ -159,9 +159,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJKZjIHy6qQjQRvQrWjQCwsi4'
                             ),
                         ]
                     ),
@@ -174,13 +174,12 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJXzNlTS-qQjQRCvn2xhSfPAk'
                             ),
                         ]
-                    ),
-
+                    )
                 ]
             )
         )
@@ -199,9 +198,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJbQ51FjKqQjQRBps6FeHC6zc'
                             ),
                         ]
                     ),
@@ -214,9 +213,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJeUp8ZTKqQjQRylE5RuNdug0'
                             ),
                         ]
                     ),
@@ -229,9 +228,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJMS8whyuqQjQRbqBGebOZsdc'
                             ),
                         ]
                     ),
@@ -244,9 +243,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJ2YgDBS2qQjQRKbi_GSqboVg'
                             ),
                         ]
                     )
@@ -268,9 +267,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJvU5mgSmqQjQR0WhA_Zruk5E'
                             ),
                         ]
                     ),
@@ -283,9 +282,9 @@ def handle_text_message(event):
                                 label='收藏',
                                 data='收藏'
                             ),
-                            MessageAction(
+                            URIAction(
                                 label='打開地圖',
-                                text='地圖'
+                                uri='https://www.google.com/maps/place/?q=place_id:ChIJeUp8ZTKqQjQREjxsd92csjg'
                             ),
                         ]
                     ),
