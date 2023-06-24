@@ -31,15 +31,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    if event.message.text == "位置":
+    if event.message.text == "開始":
         buttons_template_message = TemplateSendMessage(
-                alt_text="Please tell me where you are",
+                alt_text="分享目前位置",
                 template=ButtonsTemplate(
-                    text="Please tell me where you are",
+                    text="請分享您的位置",
                     actions=[
                         # 傳送目前位置
                         URITemplateAction(
-                            label="Send my location",
+                            label="分享位置",
                             uri="line://nv/location"
                         )
                     ]
