@@ -4,6 +4,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage,LocationSendMessage,TemplateSendMessage,ButtonsTemplate,URITemplateAction,PostbackAction,MessageAction,URIAction,CarouselTemplate,CarouselColumn,ImageCarouselTemplate,ImageCarouselColumn
 from placeFunc import findRestaurant
+from mongodb import add_record, add_record
 
 
 #line token
@@ -13,6 +14,17 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 app = Flask(__name__)
+
+# 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
+
+resType1 = "日式料理" # Ex. xx料理
+resType2 = "中式料理" 
+resType3 = "義式料理" 
+
+# 套用某函數並根據resType從資料庫中抓取相對應的資料
+resInfo1 = list()
+resInfo2 = list()
+resInfo3 = list()
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -115,7 +127,7 @@ def handle_text_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == "中式料理":
+    elif event.message.text == resType2:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
             template=CarouselTemplate(
@@ -184,72 +196,12 @@ def handle_text_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == "日式料理":
+    elif event.message.text == resType1:
         buttons_template_message = TemplateSendMessage(
             alt_text='CarouselTemplate',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kbiSOBLqu3PjxT544LET1pgdi4WFH6Bt4kJ6MY9hcGSdUK3BmC-HCvHvHqPNHD-swhFcLQjEXaJ5S90Cphtatc8TPflf5g5RNW603WMhcPddXFlfnQco9pAbscx6cLRi8VI0HqbDUs5hIZPTZ7JnUC6C8AoROFJVSwPoqxh3-_DjDR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title= '鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO(4.2)',
-                        text= '106台灣台北市大安區敦化南路二段265巷13號',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                data='收藏'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJbQ51FjKqQjQRBps6FeHC6zc'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0k8tsyE-at1uJcgRFi6_xxHP-vN4aptDd00M37Z3Unf0Dbd3hAA4FQptyWpNkyiFzqxLA9u9-PJ4AqIbvaCZnFFgjWX7UE7_M2KOfaF-u7UPrFxoNKLEcCBTINYY0AYHqIy_7aAam7gHrjB0lrkHu1MIH3Z2dU0EXEEj4ZrOV7dXkLA&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                         title= 'ibuki 日本料理餐廳 -台北遠東香格里拉(4.4)',
-                        text= '106台灣台北市大安区敦化南路二段201號7樓',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                data='收藏'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJeUp8ZTKqQjQRylE5RuNdug0'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0mZzxF_pqtOL8x5uePd9-qDINvCYGQGuOC-sMGk0HmIIEjdkY7TTIKbDQrOdTRFtia7S0Bexx6AY0Z25g3VrOzr1wgiFTNTap1m6Swqq_QHb3hg21nHAxBkX0vQ7bSDM7hXHWlCKdLwKJnUjg1XwqCmhEGUR47t4wqeoRscNjYVbL6p&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title= '禾豐日式涮涮鍋(4.4)',
-                        text= '106台灣台北市大安區復興南路二段148巷16號1樓',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                data='收藏'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJMS8whyuqQjQRbqBGebOZsdc'
-                            ),
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0l4hIBvmAy7lRHOhGIjpR4P54kjrGq1cJUYvR6SQnYZFxvjeFGnR9JAhYCUbtmf74mQ6L_AERPgCfCvoYRvhd_MWQIZNT7lMdL2_zR-RzYpy5cdNhLlt7E8c93LHEGQC4JTTMGCfM2Y7vfFuMFFbj9FM9OQ_WSUi0DcnYHuFwqSrdPh&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
-                        title= '角屋關東煮(4.2)',
-                        text= '106台灣台北市大安區大安路二段141巷',
-                        actions=[
-                            PostbackAction(
-                                label='收藏',
-                                data='收藏'
-                            ),
-                            URIAction(
-                                label='打開地圖',
-                                uri='https://www.google.com/maps/place/?q=place_id:ChIJ2YgDBS2qQjQRKbi_GSqboVg'
-                            ),
-                        ]
-                    ),
-                     CarouselColumn(
                         thumbnail_image_url='https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AZose0kbiSOBLqu3PjxT544LET1pgdi4WFH6Bt4kJ6MY9hcGSdUK3BmC-HCvHvHqPNHD-swhFcLQjEXaJ5S90Cphtatc8TPflf5g5RNW603WMhcPddXFlfnQco9pAbscx6cLRi8VI0HqbDUs5hIZPTZ7JnUC6C8AoROFJVSwPoqxh3-_DjDR&key=AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog',
                         title= '鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO(4.2)',
                         text= '106台灣台北市大安區敦化南路二段265巷13號',
@@ -325,7 +277,8 @@ def handle_text_message(event):
                         actions=[
                             PostbackAction(
                                 label='收藏',
-                                text ='您已收藏了一家餐廳'
+                                display_text ='您已收藏了: ' + 'the Diner 樂子瑞安店',
+                                data = 'the Diner 樂子瑞安店'
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -338,9 +291,10 @@ def handle_text_message(event):
                         title='遠東CAFÉ(4.5)',
                         text= '106台灣台北市大安區和平東路三段60號',
                         actions=[
-                            MessageAction( 
+                            PostbackAction(
                                 label='收藏',
-                                text ='您已收藏了一家餐廳'
+                                display_text ='您已收藏了: ' + '遠東CAFÉ',
+                                data = "遠東CAFÉ"
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -353,9 +307,10 @@ def handle_text_message(event):
                         title='Onni韓食堂(3.8)',
                         text='106台灣台北市大安區復興南路二段173號',
                         actions=[
-                            MessageAction( 
+                            PostbackAction(
                                 label='收藏',
-                                text ='您已收藏了一家餐廳'
+                                display_text ='您已收藏了: ' + 'Onni韓食堂',
+                                data = "Onni韓食堂"
                             ),
                             URIAction(
                                 label='打開地圖',
@@ -368,9 +323,10 @@ def handle_text_message(event):
                         title='找餐。店(3.8)',
                         text='106台灣台北市大安區和平東路三段1巷6-3號',
                         actions=[
-                            MessageAction( 
+                            PostbackAction(
                                 label='收藏',
-                                text ='您已收藏了一家餐廳'
+                                display_text ='您已收藏了: ' + '找餐。店',
+                                data = "找餐。店"
                             ),
                            URIAction(
                                 label='打開地圖',
@@ -382,22 +338,22 @@ def handle_text_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif event.message.text == "地圖":
-        buttons_template_message = TemplateSendMessage(
-                                    alt_text='ButtonsTemplate',
-                                    template=ButtonsTemplate(
-                                        thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1625226724815.jpg',
-                                        title='前往地圖',
-                                        text='Google map',
-                                        actions=[
-                                            URIAction(
-                                                label='前往Queencard',
-                                                uri='https://www.youtube.com/watch?v=UhD8-HYw13A'
-                                            )
-                                        ]
-                                    )
-                                )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+    # elif event.message.text == "地圖":
+    #     buttons_template_message = TemplateSendMessage(
+    #                                 alt_text='ButtonsTemplate',
+    #                                 template=ButtonsTemplate(
+    #                                     thumbnail_image_url='https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1625226724815.jpg',
+    #                                     title='前往地圖',
+    #                                     text='Google map',
+    #                                     actions=[
+    #                                         URIAction(
+    #                                             label='前往Queencard',
+    #                                             uri='https://www.youtube.com/watch?v=UhD8-HYw13A'
+    #                                         )
+    #                                     ]
+    #                                 )
+    #                             )
+    #     line_bot_api.reply_message(event.reply_token, buttons_template_message)
     else:
         msg= event.message.text
         message = TextSendMessage(text=msg)
@@ -443,6 +399,13 @@ def handle_loc_message(event):
                                 )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return 
+
+@handler.add(PostbackAction) # 監聽PostBackAciton
+
+def add_favorite(event): # 收藏餐廳函數
+     user_id = event.source.user_id
+     resName = event.post.data
+     add_favorite(user_id, resName)
 
 import os
 if __name__ == "__main__":
