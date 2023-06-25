@@ -6,6 +6,8 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMe
 from placeFunc import findRestaurant
 from mongodb import mongoDB
 from recommmendation_system import Recommendation
+import requests
+import json
 
 # ========================================= 初始變數 ========================================= 
 
@@ -48,6 +50,11 @@ def getType(latitude, longtitude):
     return type1, type2, type3
 
 resType1, resType2, resType3 = getType(lat, lng)
+
+def getTypeApi():
+    r = requests.get("https://testapi.zeabur.app/result")
+    recommend_list = json.loads(r.text)
+    return recommend_list
 
 
 # 套用函數並根據resType從資料庫中抓取相對應的資料(resInfo1, resInfo2, resInfo3)
@@ -269,6 +276,12 @@ def athena():
 @app.route('/test', methods=['GET']) 
 def test():
     return jsonify(RECOMMEND_RESTAURANT)
+
+@app.route('/testapi', methods=['GET'])
+def testapi():
+    recommend_list = getTypeApi()
+    return jsonify(recommend_list)
+
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
