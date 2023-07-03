@@ -39,7 +39,12 @@ def findNearBy(lat, lng, radius = 1000, PLACE_API_KEY = PLACE_API_KEY):
     except:
       ifNextPage = False
     results = response.json()['results']
-    PLACE_INFO.extend([[results[x]['place_id'], results[x]['geometry']['location']['lat'], results[x]['geometry']['location']['lng'], results[x]['photos'][0]["photo_reference"], results[x]['rating']] for x in range(len(results))])
+
+    for x in range(len(results)):
+        try:
+            PLACE_INFO.extend([results[x]['place_id'], results[x]['geometry']['location']['lat'], results[x]['geometry']['location']['lng'], results[x]['photos'][0]["photo_reference"], results[x]['rating']])
+        except:
+            pass
 
   return PLACE_INFO
 
@@ -56,45 +61,14 @@ def findDetail(place_id, lat, lng, photo_reference, rating, PLACE_API_KEY = PLAC
   Review = results['reviews']
 
   d = dict()
-  try:
-    d['place_id'] = place_id
-  except:
-    print("no place id")
-
-  try:
-    d['lat'] = lat
-  except:
-    print("no lat")
-
-  try:
-    d['lng'] = lng
-  except:
-    print("no lng")
-
-  try:
-    d['photo_refernce'] = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photo_reference+ '&key=' + PLACE_API_KEY
-  except:
-    print("no photo")
-
-  try:
-    d['rating'] = rating
-  except:
-    print("no rating")
-
-  try:
-    d['address'] = Address
-  except:
-    print("no addres")
-
-  try:
-    d['open_hour'] = Open_hour
-  except:
-    print("no open hour")
-
-  try:
-    d['review'] = Review
-  except:
-    print("no review")
+  d['place_id'] = place_id
+  d['lat'] = lat
+  d['lng'] = lng
+  d['photo_refernce'] = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photo_reference+ '&key=' + PLACE_API_KEY
+  d['rating'] = rating
+  d['address'] = Address
+  d['open_hour'] = Open_hour
+  d['review'] = Review
 
   return Name, d
 
