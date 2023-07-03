@@ -34,7 +34,7 @@ resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
 mongoDB_key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
 
 # 連接 mongoDB 資料庫 
-# myDB = mongoDB(mongoDB_key)
+myDB = mongoDB(mongoDB_key)
 # 把抓取資料丟入餐廳資料庫 (Merge)
 # for resName in [i for i in df.keys()]:
 #     myDB.add_rest_info("restaruant", df, resName)
@@ -88,7 +88,6 @@ def generate_carousel(resInfo):
             text= df[res]['address'],
             actions=[   PostbackAction(
                             label='收藏',
-                            # display_text ='您已收藏了: ' + res,
                             data = res
                         ),
                         URIAction(
@@ -193,7 +192,11 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return 
     elif event.message.text == "收藏名單":
-        msg = "收藏名單：\n1. 莫宰羊-大安台大店\n2. 亞廬義大利窯烤吃到飽餐廳\n3. 遠東CAFÉ\n4. 詹記麻辣火鍋 敦南店"
+        userId = event.source.user_id
+        msg = ""
+        document = myDB.show_favo_rest(userId)
+        for instance in document:
+            msg + instance['resName'] + "\n"
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
     else:
@@ -242,11 +245,11 @@ def handle_loc_message(event):
 
 @handler.add(PostbackEvent) # 監聽PostBackAciton
 def add_favorite(event): # 收藏餐廳函數
-    #  user_id = event.source.user_id
+     user_id = event.source.user_id
      resName = event.postback.data
      reply_text = "您已收藏該餐廳: " + resName
      line_bot_api.reply_message(event.reply_token, TextMessage(text=reply_text))
-    #  myDB.add_favo_rest(df, user_id, resName)
+     myDB.add_favo_rest(df, user_id, resName)
 
 @app.route('/athena', methods=["POST"])
 def athena():

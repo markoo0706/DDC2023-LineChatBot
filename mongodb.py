@@ -44,7 +44,9 @@ class mongoDB():
         return
     def show_favo_rest(self, userId): 
         query = {"user" : userId}
-        existing_document  = self.DB["favorite"].find_many(query)
+        result  = self.DB["favorite"].find(query)
+        document = list(result)
+        return document
 
 
 
@@ -65,15 +67,19 @@ def Test(): # 測試函數
     lat = 25.020859 
     lng = 121.542776
     df = findRestaurant(lat, lng)
-
     key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
     mydb = mongoDB(key)
-
-    for resName in [i for i in df.keys()]:
-        mydb.add_rest_info("restaruant", df, resName)
-    mydb.show_colleciton("restaruant")
+    mydb.add_favo_rest(df, 123, list(df.keys())[0]) 
+    mydb.add_favo_rest(df, 123, list(df.keys())[1])
+    mydb.add_favo_rest(df, 123, list(df.keys())[2])
+    document = mydb.show_favo_rest(123)
+    for instance in document:
+        print(instance['resName'])
+    # for resName in [i for i in df.keys()]:
+    #     mydb.add_rest_info("restaruant", df, resName)
+    # mydb.show_colleciton("restaruant")
     
-    mydb.delete_collection("restaruant")
-    mydb.delete_collection("favorite")
+    # mydb.delete_collection("restaruant")
+    # mydb.delete_collection("favorite")
 
 # Test()
