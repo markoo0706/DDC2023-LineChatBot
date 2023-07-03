@@ -196,7 +196,7 @@ def handle_text_message(event):
         msg = ""
         document = myDB.show_favo_rest(userId)
         for instance in document:
-            msg + instance['resName'] + "\n"
+            msg = msg + instance['resName'] + "\n"
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
     else:
