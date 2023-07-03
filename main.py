@@ -20,8 +20,12 @@ handler = WebhookHandler(channel_secret)
 # 經緯度，可跟據LocationMessage獲得
 # 預設位置
 
-lat = 25.020859 
-lng = 121.542776
+TaipeiLoc = (25.020859, 121.542776)
+TaichungLoc = (24.086310772481895, 120.69548929568965)
+
+lat = TaipeiLoc[0]
+lng = TaipeiLoc[1]
+
 df = findRestaurant(lat, lng) 
 
 resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
@@ -84,7 +88,7 @@ def generate_carousel(resInfo):
             text= df[res]['address'],
             actions=[   PostbackAction(
                             label='收藏',
-                            display_text ='您已收藏了: ' + res,
+                            # display_text ='您已收藏了: ' + res,
                             data = res
                         ),
                         URIAction(
@@ -239,8 +243,10 @@ def handle_loc_message(event):
 @handler.add(PostbackAction) # 監聽PostBackAciton
 
 def add_favorite(event): # 收藏餐廳函數
-     user_id = event.source.user_id
-     resName = event.post.data
+    #  user_id = event.source.user_id
+     resName = event.postback.data
+     reply_text = "您已收藏該餐廳: " + resName
+     line_bot_api.reply_message(event.reply_token, TextMessage(text=reply_text))
     #  myDB.add_favo_rest(df, user_id, resName)
 
 @app.route('/athena', methods=["POST"])
