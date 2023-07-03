@@ -56,14 +56,45 @@ def findDetail(place_id, lat, lng, photo_reference, rating, PLACE_API_KEY = PLAC
   Review = results['reviews']
 
   d = dict()
-  d['place_id'] = place_id
-  d['lat'] = lat
-  d['lng'] = lng
-  d['photo_refernce'] = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photo_reference+ '&key=' + PLACE_API_KEY
-  d['rating'] = rating
-  d['address'] = Address
-  d['open_hour'] = Open_hour
-  d['review'] = Review
+  try:
+    d['place_id'] = place_id
+  except:
+    print("no place id")
+
+  try:
+    d['lat'] = lat
+  except:
+    print("no lat")
+
+  try:
+    d['lng'] = lng
+  except:
+    print("no lng")
+
+  try:
+    d['photo_refernce'] = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photo_reference+ '&key=' + PLACE_API_KEY
+  except:
+    print("no photo")
+
+  try:
+    d['rating'] = rating
+  except:
+    print("no rating")
+
+  try:
+    d['address'] = Address
+  except:
+    print("no addres")
+
+  try:
+    d['open_hour'] = Open_hour
+  except:
+    print("no open hour")
+
+  try:
+    d['review'] = Review
+  except:
+    print("no review")
 
   return Name, d
 
