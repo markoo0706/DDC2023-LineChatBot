@@ -41,10 +41,10 @@ def findNearBy(lat, lng, radius = 1000, PLACE_API_KEY = PLACE_API_KEY):
     results = response.json()['results']
 
     for x in range(len(results)):
-        try:
-            PLACE_INFO.extend([results[x]['place_id'], results[x]['geometry']['location']['lat'], results[x]['geometry']['location']['lng'], results[x]['photos'][0]["photo_reference"], results[x]['rating']])
-        except:
-            pass
+      try:
+        PLACE_INFO.extend([[results[x]['place_id'], results[x]['geometry']['location']['lat'], results[x]['geometry']['location']['lng'], results[x]['photos'][0]["photo_reference"], results[x]['rating']]])
+      except:
+        pass
 
   return PLACE_INFO
 

@@ -17,8 +17,7 @@ channel_secret = '14a2ec07a0be3dceff5b6cefcbf60b03'
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-# 經緯度，可跟據LocationMessage獲得
-# 預設位置
+# 經緯度，可跟據LocationMessage 獲得改變
 
 TaipeiLoc = (25.020859, 121.542776)
 TaichungLoc = (24.086310772481895, 120.69548929568965)
@@ -26,7 +25,10 @@ TaichungLoc = (24.086310772481895, 120.69548929568965)
 lat = TaipeiLoc[0]
 lng = TaipeiLoc[1]
 
-df = findRestaurant(lat, lng) 
+# 找台北餐廳
+df = findRestaurant(lat, lng)
+# 找台中餐廳
+# df = findRestaurant(TaichungLoc[0], TaichungLoc[1]) 
 
 resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
 
@@ -48,9 +50,9 @@ app.config["JSON_AS_ASCII"] = False
 # 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
 def getType(latitude, longtitude):
     # /...串接ChatGbt獲得推薦類別的函數，待修改。
-    type1 = "義式料理"
-    type2 = "中式料理"
-    type3 = "日式料理" 
+    type1 = "義式料理" # 中式料理
+    type2 = "中式料理" # 日式料理
+    type3 = "日式料理" # 美式料理
     return type1, type2, type3
 
 resType1, resType2, resType3 = getType(lat, lng)
@@ -64,6 +66,7 @@ def getTypeApi():
 # 套用函數並根據resType從資料庫中抓取相對應的資料(resInfo1, resInfo2, resInfo3)
 
 # ========================================= 以下為手動資料（待函數完成需修改）========================================= 
+# ============================台北資料========================
 
 # 類別一 的餐廳名稱
 resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '蘇活義大利麵坊', '卡帛素食烘培‧義式廚房‧港式餐點 總店', 'ANTICO FORNO 老烤箱義式披薩餐酒']
@@ -73,6 +76,20 @@ resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶�
 resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
 # 其他類別 的餐廳名稱
 otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
+
+# ============================台中資料========================
+
+# resName1 = ["大呼過癮臭臭鍋", "客家本色Natural Hakka 大里店", "豪記排骨飯",
+#             "大世紀無骨鵝肉", "古都台南擔仔麵（大里店）傳統小吃、平價美食、爌肉飯", "大里清真黃牛肉水餃館",
+#             "好妙天然手作坊", "江家小吃麵店", "兩披索靚鍋（外帶燒肉飯、肉羹）", "莊家嘉義火雞肉飯-中興仁化店",
+#             "金燄鐵板燒", "福鹿手工水餃-大里店 (原:福元寶水餃)", "丐幫滷味大里分舵", "半伴拌麵食館(大里成功總店)｜大里美食｜會議餐客製｜大里麵食｜企業便當｜客製便當｜",
+#             "台北江麻辣臭豆腐火鍋專賣鋪（塗城店）", "麻辣女王（成功店）", "尚食在餐廳 Shang Shi Zai Restaurant", "三媽臭臭鍋大里成功店", "肉圓李（大里店）愛團購",
+#             "甯客串串鍋-大里旗艦店", "大腸麵線", "阿娘喂...排骨酥麵"] #中式
+# resName2 = ["すき家 SUKIYA 台中軟體園區店", "禾荳家-Curry(北海道湯咖哩專賣店)科技店 台中美食 台中美食推薦 台中咖哩 大里美食 大里咖哩 大里日式料理 大里必吃 異想新樂園", "大和川日式料理（大里成功店）",
+#             "屋裡ウリ - 巷弄裡的日式家常料理"] # 日式
+# resName3 = ["弘爺漢堡", "Subway台中大里店", "弘爺漢堡 - 青年店", "早安美芝城大里活力成功", "弘爺漢堡 - 達日好店", 
+#             "Hong Ya Hamburger", "多客牛排", "翡翠精品莊園咖啡-大里杙棧門市", "斐比樂斯咖啡甜點", "漢堡大師 青年店"] # 美式
+# resName4 = [i for i in list(df.keys()) if i not in (resName1 + resName2 + resName3)]
 
 # 自動生成 carousel＿columns的 函數
 def generate_carousel(resInfo):
