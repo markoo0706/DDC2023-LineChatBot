@@ -2,7 +2,7 @@
 from flask import Flask, request, abort, jsonify
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage,LocationSendMessage,TemplateSendMessage,ButtonsTemplate,URITemplateAction,PostbackAction,MessageAction,URIAction,CarouselTemplate,CarouselColumn,ImageCarouselTemplate,ImageCarouselColumn
+from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationMessage,LocationSendMessage,TemplateSendMessage,ButtonsTemplate,URITemplateAction,PostbackAction,MessageAction,URIAction,CarouselTemplate,CarouselColumn,ImageCarouselTemplate,ImageCarouselColumn,PostbackEvent
 from placeFunc import findRestaurant
 from mongodb import mongoDB
 from recommmendation_system import Recommendation
@@ -240,8 +240,7 @@ def handle_loc_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return
 
-@handler.add(PostbackAction) # 監聽PostBackAciton
-
+@handler.add(PostbackEvent) # 監聽PostBackAciton
 def add_favorite(event): # 收藏餐廳函數
     #  user_id = event.source.user_id
      resName = event.postback.data
