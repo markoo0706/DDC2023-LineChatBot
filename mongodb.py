@@ -47,22 +47,20 @@ class mongoDB():
         result  = self.DB["favorite"].find(query)
         document = list(result)
         return document
-
-
-
-    def delete_user_info(self, userId):
+    def delete_user_info(self, userId): # 刪除使用者的資料
         return
-    def delete_res_info(self, colName, resName):
+    def delete_res_info(self, colName, resName): # 刪除餐廳資料
         return
     def delete_collection(self, colName):
         result = self.DB[colName].delete_many({})
-        
-    # def delete_db(self, colName):
-    #     for i in ["favorite", "restaurant", "penalty", "recommend"]:
-    #         d
     def show_colleciton(self, colName):
         print(self.DB[colName].count_documents({}))
-        
+    def clear_all_DB(self): # 刪除資料庫中所有資料
+        self.favDB.delete_many({})
+        self.penDB.delete_many({})
+        self.resDB.delete_many({})
+        self.recDB.delete_many({})
+
 def Test(): # 測試函數
     lat = 25.020859 
     lng = 121.542776
@@ -82,4 +80,5 @@ def Test(): # 測試函數
     # mydb.delete_collection("restaruant")
     # mydb.delete_collection("favorite")
 
-# Test()
+
+# Test()測試函數
