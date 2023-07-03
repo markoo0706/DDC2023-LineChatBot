@@ -78,6 +78,8 @@ def findRestaurant(lat, lng):
   for place_id, lat, lng, photo_reference, rating in places:
     try:
       name, d = findDetail(place_id, lat, lng, photo_reference, rating)
+      if len(name) >= 40:
+          name = name[:30] + "..."
       restaurant_INFO[name] = d
       restaurant_INFO[name]['name'] = name
     except:
