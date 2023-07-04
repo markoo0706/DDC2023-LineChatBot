@@ -11,6 +11,7 @@ import googlemaps
 import requests
 import pandas as pd
 import time
+from restaurant_tag import run_classification
 
 PLACE_API_KEY = 'AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog'
 
@@ -83,6 +84,7 @@ def findRestaurant(lat, lng):
           print(name)
       restaurant_INFO[name] = d
       restaurant_INFO[name]['name'] = name
+      restaurant_INFO[name]['type'] = run_classification(d['review'])
     except:
       pass
   return restaurant_INFO
