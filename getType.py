@@ -1,4 +1,5 @@
-import geopy.distance
+import geopy
+import requests
 
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
