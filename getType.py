@@ -10,5 +10,9 @@ def getTypeApi():
 def getType(lat, lng):
   recommend_list = getTypeApi()
   dist_list = [[geodesic((lat, lng), (x['lat'], x['lng'])).km, x['recommend']] for x in recommend_list]
-  type = min(dist_list)[1].split()
-  return type[0][2:], type[1][2:], type[2][2:]
+  txt = min(dist_list)[1]
+  x = txt.replace(" ", "")
+  resType1 = x[2:6]
+  resType2 = x[9:13]
+  resType3 = x[16:20]
+  return resType1, resType2, resType3
