@@ -297,36 +297,36 @@ def handle_loc_message(event):
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
         resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resInfo3)
-        msg = resType1 + resType2 + resType3
-        message = TextSendMessage(text=msg)
-        line_bot_api.reply_message(event.reply_token,message)
-        # buttons_template_message = TemplateSendMessage(
-        #                             alt_text='ButtonsTemplate',
-        #                             template=ButtonsTemplate(
-        #                                 thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
-        #                                 title='餐廳類型',
-        #                                 text='請選擇餐廳類型',
-        #                                 actions=[
-        #                                     MessageAction(
-        #                                         label= resType1,
-        #                                         text= resType1
-        #                                     ),
-        #                                     MessageAction(
-        #                                         label= resType2,
-        #                                         text= resType2
-        #                                     ),
-        #                                     MessageAction(
-        #                                         label = resType3,
-        #                                         text = resType3
-        #                                     ),
-        #                                     MessageAction(
-        #                                         label = "其他類別",
-        #                                         text = "其他類別"
-        #                                     )
-        #                                 ]
-        #                             )
-        #                         )
-        # line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        # msg = resType1 + resType2 + resType3
+        # message = TextSendMessage(text=msg)
+        # line_bot_api.reply_message(event.reply_token,message)
+        buttons_template_message = TemplateSendMessage(
+                                    alt_text='ButtonsTemplate',
+                                    template=ButtonsTemplate(
+                                        thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
+                                        title='餐廳類型',
+                                        text='請選擇餐廳類型',
+                                        actions=[
+                                            MessageAction(
+                                                label= resType1,
+                                                text= resType1
+                                            ),
+                                            MessageAction(
+                                                label= resType2,
+                                                text= resType2
+                                            ),
+                                            MessageAction(
+                                                label = resType3,
+                                                text = resType3
+                                            ),
+                                            MessageAction(
+                                                label = "其他類別",
+                                                text = "其他類別"
+                                            )
+                                        ]
+                                    )
+                                )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return
 
 @handler.add(PostbackEvent) # 監聽PostBackAciton
