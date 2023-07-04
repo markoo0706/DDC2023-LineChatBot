@@ -84,7 +84,7 @@ def findRestaurant(lat, lng):
           print(name)
       restaurant_INFO[name] = d
       restaurant_INFO[name]['name'] = name
-      restaurant_INFO[name]['type'] = run_classification(d['review'])
+      restaurant_INFO[name]['type'] = run_classification(d['review'], name)
     except:
       pass
   return restaurant_INFO
