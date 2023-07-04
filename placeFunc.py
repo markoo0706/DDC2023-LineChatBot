@@ -12,6 +12,7 @@ import requests
 import pandas as pd
 import time
 from restaurant_tag import run_classification
+from restaurant_score import restaurant_score
 
 PLACE_API_KEY = 'AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog'
 
@@ -87,5 +88,6 @@ def findRestaurant(lat, lng):
       restaurant_INFO[name]['type'] = run_classification(d['review'], name)
     except:
       pass
-  return restaurant_INFO
+  restaurant_INFO2 = restaurant_score(restaurant_INFO)  
+  return restaurant_INFO2
 
