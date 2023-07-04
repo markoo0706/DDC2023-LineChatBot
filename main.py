@@ -247,6 +247,35 @@ def handle_text_message(event):
         resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
         # # 其他類別 的餐廳名稱
         otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
+        buttons_template_message = TemplateSendMessage(
+                                    alt_text='ButtonsTemplate',
+                                    template=ButtonsTemplate(
+                                        thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
+                                        title='餐廳類型',
+                                        text='請選擇餐廳類型',
+                                        actions=[
+                                            MessageAction(
+                                                label= resType1,
+                                                text= resType1
+                                            ),
+                                            MessageAction(
+                                                label= resType2,
+                                                text= resType2
+                                            ),
+                                            MessageAction(
+                                                label = resType3,
+                                                text = resType3
+                                            ),
+                                            MessageAction(
+                                                label = "其他類別",
+                                                text = "其他類別"
+                                            )
+                                        ]
+                                    )
+                                )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        return
+
     elif event.message.text == "刪除收藏":
         userId = event.source.user_id
         myDB.delete_collection("favorite") # bug,需傳入id
@@ -265,6 +294,7 @@ def handle_loc_message(event):
         global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df# 把lat, lng, df 設為global 
         lat = event.message.latitude
         lng = event.message.longitude
+        print(lat, lng) # log 測試用
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
         resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resInfo3)

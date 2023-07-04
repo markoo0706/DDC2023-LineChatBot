@@ -65,7 +65,7 @@ def run_classification(raw, name):
     x = data_processing(df)
     loaded_model = joblib.load('models/tag_svc_model')
     result = loaded_model.predict(x)
-    tag_dict = { 0:"中式料理", 1:"其他料理", 2:"台式料理", 3:"日式料理", 4:"法式料理", 5:"泰式料理", 6:"美式料理", 7:"義式料理", 8:"韓式"}
+    tag_dict = { 0:"中式料理", 1:"其他料理", 2:"台式料理", 3:"日式料理", 4:"法式料理", 5:"泰式料理", 6:"美式料理", 7:"義式料理", 8:"韓式料理"}
     tag = []
     for i in result:
         if tag_dict[i] in tag:
