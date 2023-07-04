@@ -18,26 +18,6 @@ channel_secret = '14a2ec07a0be3dceff5b6cefcbf60b03'
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-# 經緯度，可跟據LocationMessage 獲得改變
-
-TaipeiLoc = (25.020859, 121.542776)
-TaichungLoc = (24.086310772481895, 120.69548929568965)
-
-lat = TaipeiLoc[0]
-lng = TaipeiLoc[1]
-
-if (lat != TaipeiLoc[0]) | (lng != TaipeiLoc[1]): #不在台北
-    print("1")
-else:
-    print("HaHa")
-
-# 找台北餐廳
-# df = findRestaurant(lat, lng)
-# 找台中餐廳
-df = findRestaurant(TaichungLoc[0], TaichungLoc[1]) 
-
-resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
-
 # MongoDB Connection Key
 mongoDB_key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
 
@@ -52,57 +32,24 @@ myDB = mongoDB(mongoDB_key)
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 
+### 全域變數宣告
+TaipeiLoc = (25.020859, 121.542776)
+df = findRestaurant(TaipeiLoc[0], TaipeiLoc[1]) 
+resname = [i for i in df.keys()]
 
-# 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
-# def getType(latitude, longtitude):
-#     # /...串接ChatGbt獲得推薦類別的函數，待修改。
-#     type1 = "義式料理" 
-#     type2 = "中式料理" 
-#     type3 = "日式料理" 
-#     return type1, type2, type3
+resType1 = "義式料理" 
+resType2 = "日式料理" 
+resType3 = "中式料理" 
 
-resType1, resType2, resType3 = getType(lat, lng)
+resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '蘇活義大利麵坊', '卡帛素食烘培‧義式廚房‧港式餐點 總店', 'ANTICO FORNO 老烤箱義式披薩餐酒']
+resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶樓', '阿玉水餃 (生水餃專賣店)', '紅豆食府 遠企店', '恬園餐廳 - 福華國際文教會館', '溫州大餛飩', '涮八方紫銅鍋', '瑞安豆漿大王', '阿英海產粥', '蔣記家薌麵', '熱翻天生猛海鮮', '忠誠山東蔥油餅 - 此燈亮有餅', '小李子蘭州牛肉拉麵館', '大連風味館', '龍門客棧餃子館 瑞安店', '老龍牛肉麵大王', '花麻辣 麻辣鴛鴦 沙茶火鍋', '小辣椒魷魚羹', '三顧茅廬台北四維店', '八方雲集 (師院店)', '通化街米粉湯50年老店（胡記復興旗艦店）','鳳城燒臘粵菜']
+resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
 
-# For 台中用
-resType1 = "中式料理"
-resType2 = "日式料理"
-resType3 = "美式料理"
 
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
     recommend_list = json.loads(r.text)
     return recommend_list
-
-
-# 套用函數並根據resType從資料庫中抓取相對應的資料(resInfo1, resInfo2, resInfo3)
-
-# ========================================= 以下為手動資料（待函數完成需修改）========================================= 
-# ============================台北資料========================
-
-# # 類別一 的餐廳名稱
-# resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '蘇活義大利麵坊', '卡帛素食烘培‧義式廚房‧港式餐點 總店', 'ANTICO FORNO 老烤箱義式披薩餐酒']
-# # 類別二 的餐廳名稱
-# resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶樓', '阿玉水餃 (生水餃專賣店)', '紅豆食府 遠企店', '恬園餐廳 - 福華國際文教會館', '溫州大餛飩', '涮八方紫銅鍋', '瑞安豆漿大王', '阿英海產粥', '蔣記家薌麵', '熱翻天生猛海鮮', '忠誠山東蔥油餅 - 此燈亮有餅', '小李子蘭州牛肉拉麵館', '大連風味館', '龍門客棧餃子館 瑞安店', '老龍牛肉麵大王', '花麻辣 麻辣鴛鴦 沙茶火鍋', '小辣椒魷魚羹', '三顧茅廬台北四維店', '八方雲集 (師院店)', '通化街米粉湯50年老店（胡記復興旗艦店）','鳳城燒臘粵菜']
-# # 類別三 的餐廳名稱
-# resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
-# # 其他類別 的餐廳名稱
-# otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
-
-# ============================台中資料========================
-
-resInfo1 = ["大呼過癮臭臭鍋", "客家本色Natural Hakka 大里店", "豪記排骨飯",
-            "大世紀無骨鵝肉", "古都台南擔仔麵（大里店）傳統小吃、平價美食、爌肉飯", "大里清真黃牛肉水餃館",
-            "好妙天然手作坊", "江家小吃麵店", "兩披索靚鍋（外帶燒肉飯、肉羹）", "莊家嘉義火雞肉飯-中興仁化店",
-            "金燄鐵板燒", "福鹿手工水餃-大里店 (原:福元寶水餃)", "丐幫滷味大里分舵", "半伴拌麵食館(大里成功總店)｜大里美食｜會議餐客製｜大里麵食...",
-            "台北江麻辣臭豆腐火鍋專賣鋪（塗城店）", "麻辣女王（成功店）", "尚食在餐廳 Shang Shi Zai Restaurant", "三媽臭臭鍋大里成功店", "肉圓李（大里店）愛團購",
-            "甯客串串鍋-大里旗艦店", "大腸麵線", "阿娘喂...排骨酥麵"] #中式
-resInfo2 = ["すき家 SUKIYA 台中軟體園區店", "禾荳家-Curry(北海道湯咖哩專賣店)科技店 台中美食 台...", "大和川日式料理（大里成功店）",
-            "屋裡ウリ - 巷弄裡的日式家常料理"] # 日式
-resInfo3 = ["弘爺漢堡", "Subway台中大里店", "弘爺漢堡 - 青年店", "早安美芝城大里活力成功", "弘爺漢堡 - 達日好店", 
-            "Hong Ya Hamburger", "多客牛排", "翡翠精品莊園咖啡-大里杙棧門市", "斐比樂斯咖啡甜點", 
-            "漢堡大師 青年店", "8C Origin Coffee|包場|家庭聚會|手沖咖啡廳...", 
-            "隨便，坐 sit anywhere 大里必吃早午餐|輕食便當..."] # 美式
-otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
 
 # 自動生成 carousel＿columns的 函數
 def generate_carousel(resInfo):
@@ -230,10 +177,78 @@ def handle_text_message(event):
             msg = msg + instance['resName'] + "\n"
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
+    elif event.message.text == "範例地點:台中":
+        TaichungLoc = (24.086310772481895, 120.69548929568965)
+        df = findRestaurant(TaichungLoc[0], TaichungLoc[1]) 
+        resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName # 修改global變數
+        resType1 = "中式料理"
+        resType2 = "日式料理"
+        resType3 = "美式料理"
+        resInfo1 = ["大呼過癮臭臭鍋", "客家本色Natural Hakka 大里店", "豪記排骨飯",
+            "大世紀無骨鵝肉", "古都台南擔仔麵（大里店）傳統小吃、平價美食、爌肉飯", 
+            "大里清真黃牛肉水餃館","好妙天然手作坊", "江家小吃麵店", "兩披索靚鍋（外帶燒肉飯、肉羹）", 
+            "莊家嘉義火雞肉飯-中興仁化店","金燄鐵板燒", "福鹿手工水餃-大里店 (原:福元寶水餃)", 
+            "丐幫滷味大里分舵", "半伴拌麵食館(大里成功總店)｜大里美食｜會議餐客製｜大里麵食...",
+            "台北江麻辣臭豆腐火鍋專賣鋪（塗城店）", "麻辣女王（成功店）", 
+            "尚食在餐廳 Shang Shi Zai Restaurant", "三媽臭臭鍋大里成功店", "肉圓李（大里店）愛團購",
+            "甯客串串鍋-大里旗艦店", "大腸麵線", "阿娘喂...排骨酥麵"] #中式
+        resInfo2 = ["すき家 SUKIYA 台中軟體園區店", "禾荳家-Curry(北海道湯咖哩專賣店)科技店 台中美食 台...", "大和川日式料理（大里成功店）",
+            "屋裡ウリ - 巷弄裡的日式家常料理"] # 日式
+        resInfo3 = ["弘爺漢堡", "Subway台中大里店", "弘爺漢堡 - 青年店", "早安美芝城大里活力成功", "弘爺漢堡 - 達日好店", 
+            "Hong Ya Hamburger", "多客牛排", "翡翠精品莊園咖啡-大里杙棧門市", "斐比樂斯咖啡甜點", 
+            "漢堡大師 青年店", "8C Origin Coffee|包場|家庭聚會|手沖咖啡廳...", 
+            "隨便，坐 sit anywhere 大里必吃早午餐|輕食便當..."] # 美式
+        otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
+        buttons_template_message = TemplateSendMessage(
+                                    alt_text='ButtonsTemplate',
+                                    template=ButtonsTemplate(
+                                        thumbnail_image_url='https://i.imgur.com/ZVgyDSs.png',
+                                        title='餐廳類型',
+                                        text='請選擇餐廳類型',
+                                        actions=[
+                                            MessageAction(
+                                                label= resType1,
+                                                text= resType1
+                                            ),
+                                            MessageAction(
+                                                label= resType2,
+                                                text= resType2
+                                            ),
+                                            MessageAction(
+                                                label = resType3,
+                                                text = resType3
+                                            ),
+                                            MessageAction(
+                                                label = "其他類別",
+                                                text = "其他類別"
+                                            )
+                                        ]
+                                    )
+                                )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        return
+    elif event.message.text == "範例地點:台北":
+        TaipeiLoc = (25.020859, 121.542776)
+        df = findRestaurant(TaipeiLoc[0], TaipeiLoc[1]) 
+        resname = [i for i in df.keys()] 
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName # 修改global變數
+        resType1 = "義式料理"
+        resType2 = "日式料理"
+        resType3 = "中式料理"
+        # # 類別一 的餐廳名稱
+        resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '蘇活義大利麵坊', '卡帛素食烘培‧義式廚房‧港式餐點 總店', 'ANTICO FORNO 老烤箱義式披薩餐酒']
+        # # 類別二 的餐廳名稱
+        resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶樓', '阿玉水餃 (生水餃專賣店)', '紅豆食府 遠企店', '恬園餐廳 - 福華國際文教會館', '溫州大餛飩', '涮八方紫銅鍋', '瑞安豆漿大王', '阿英海產粥', '蔣記家薌麵', '熱翻天生猛海鮮', '忠誠山東蔥油餅 - 此燈亮有餅', '小李子蘭州牛肉拉麵館', '大連風味館', '龍門客棧餃子館 瑞安店', '老龍牛肉麵大王', '花麻辣 麻辣鴛鴦 沙茶火鍋', '小辣椒魷魚羹', '三顧茅廬台北四維店', '八方雲集 (師院店)', '通化街米粉湯50年老店（胡記復興旗艦店）','鳳城燒臘粵菜']
+        # # 類別三 的餐廳名稱
+        resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
+        # # 其他類別 的餐廳名稱
+        otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
     else:
         msg= event.message.text
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
+
 
          
 
@@ -242,8 +257,8 @@ def handle_loc_message(event):
         global lat, lng # 把lat, lng, df 設為global 
         lat = event.message.latitude
         lng = event.message.longitude
-        # 根據位置找出附近餐廳 -> df = findRestaurant(lat, lng) 
-        # 2. 天氣轉推薦類別(Chatgbt, 推薦系統) -> resType1, resType2, resType3
+        df = findRestaurant(lat, lng) # 爬取餐廳資料
+        resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
         # 3. 對附近餐廳進行分類 -> restInfo1, resInfo2, resInfo3, otherResName
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
