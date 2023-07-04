@@ -13,6 +13,6 @@ def getType(lat, lng):
   txt = min(dist_list)[1]
   x = txt.replace(" ", "")
   resType1 = x[2:6]
-  resType2 = x[9:13]
-  resType3 = x[16:20]
+  resType2 = x[8:12]
+  resType3 = x[14:18]
   return resType1, resType2, resType3
