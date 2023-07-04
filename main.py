@@ -8,6 +8,7 @@ from mongodb import mongoDB
 from recommmendation_system import Recommendation
 import requests
 import json
+from getType import getType
 
 # ========================================= 初始變數 ========================================= 
 
@@ -53,12 +54,12 @@ app.config["JSON_AS_ASCII"] = False
 
 
 # 接收ChatGbt 推薦的飲食類型 function(lat, lng) = type1, type2, type3
-def getType(latitude, longtitude):
-    # /...串接ChatGbt獲得推薦類別的函數，待修改。
-    type1 = "義式料理" 
-    type2 = "中式料理" 
-    type3 = "日式料理" 
-    return type1, type2, type3
+# def getType(latitude, longtitude):
+#     # /...串接ChatGbt獲得推薦類別的函數，待修改。
+#     type1 = "義式料理" 
+#     type2 = "中式料理" 
+#     type3 = "日式料理" 
+#     return type1, type2, type3
 
 resType1, resType2, resType3 = getType(lat, lng)
 
