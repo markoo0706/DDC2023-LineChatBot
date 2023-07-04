@@ -1,5 +1,6 @@
 import geopy
 import requests
+import json
 
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
