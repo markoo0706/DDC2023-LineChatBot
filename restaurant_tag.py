@@ -58,9 +58,10 @@ def data_processing(dfr):
 
     return x
 
-def run_classification(raw):
+def run_classification(raw, name):
     df = pd.DataFrame.from_dict(raw)
     df = df[['text']]
+    df['text'] = df['text'] + name
     x = data_processing(df)
     loaded_model = joblib.load('models/tag_svc_model')
     result = loaded_model.predict(x)
