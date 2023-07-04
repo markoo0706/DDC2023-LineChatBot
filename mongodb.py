@@ -86,4 +86,4 @@ def Test(): # 測試函數
     mydb.delete_collection("favorite")
     mydb.close_connection()
 
-Test()
+# Test()

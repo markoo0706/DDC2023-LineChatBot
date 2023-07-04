@@ -48,6 +48,7 @@ resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 
 def getInfo(df, resname, resType):
     info = [name for name in resname if resType in df[name]["type"][0]]
     return info
+
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
     recommend_list = json.loads(r.text)
@@ -180,10 +181,10 @@ def handle_text_message(event):
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "範例地點:台中":
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df # 修改global變數
         TaichungLoc = (24.086310772481895, 120.69548929568965)
         df = findRestaurant(TaichungLoc[0], TaichungLoc[1]) 
         resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
-        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName # 修改global變數
         resType1 = "中式料理"
         resType2 = "日式料理"
         resType3 = "美式料理"
@@ -231,10 +232,10 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return
     elif event.message.text == "範例地點:台北":
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df
         TaipeiLoc = (25.020859, 121.542776)
         df = findRestaurant(TaipeiLoc[0], TaipeiLoc[1]) 
-        resname = [i for i in df.keys()] 
-        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName # 修改global變數
+        resname = [i for i in df.keys()]  
         resType1 = "義式料理"
         resType2 = "日式料理"
         resType3 = "中式料理"
@@ -246,6 +247,11 @@ def handle_text_message(event):
         resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
         # # 其他類別 的餐廳名稱
         otherResName = [i for i in resname if i not in (resInfo1 + resInfo2 + resInfo3)]
+    elif event.message.text == "刪除收藏":
+        userId = event.source.user_id
+        myDB.delete_collection("favorite") # bug,需傳入id
+        msg = "您已清空收藏名單"
+        line_bot_api.reply_message(event.reply_token,message)
     else:
         msg= event.message.text
         message = TextSendMessage(text=msg)
@@ -256,12 +262,12 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):
-        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName# 把lat, lng, df 設為global 
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df# 把lat, lng, df 設為global 
         lat = event.message.latitude
         lng = event.message.longitude
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
-        resInfo1, resInfo2, resInfo3 = getInfo(resType1), getInfo(resType2), getInfo(resInfo3)
+        resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resInfo3)
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
                                     template=ButtonsTemplate(
