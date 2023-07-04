@@ -37,6 +37,7 @@ TaipeiLoc = (25.020859, 121.542776)
 df = findRestaurant(TaipeiLoc[0], TaipeiLoc[1]) 
 resname = [i for i in df.keys()]
 
+# global resType1, resType2, resType3
 resType1 = "義式料理" 
 resType2 = "日式料理" 
 resType3 = "中式料理" 
@@ -102,6 +103,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
+    global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3
     if event.message.text == "開始":
         buttons_template_message = TemplateSendMessage(
                 alt_text="分享目前位置",
