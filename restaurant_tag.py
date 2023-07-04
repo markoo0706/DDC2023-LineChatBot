@@ -34,18 +34,6 @@ def preprocess_text(text):
     return text
 
 def data_processing(dfr):
-    # dfr = pd.DataFrame(columns=['評論','標籤'])
-    # res = pd.DataFrame.from_dict(df).T
-    # res[['review','restaurant_label']]
-    # i=0
-    # for rs,l in zip(list(res['review']), list(res['restaurant_label'])):
-        # for r in rs:
-            # if type(l)!=str:
-                # l = l[1]
-            # else:
-                # l = l[-4:]
-            # dfr.loc[i] = [r['text'],l]
-            # i+=1
 
     with open("models/stopwords_zh-tw.txt", encoding="utf-8") as fin:
         stopwords = fin.read().split("\n")[1:]
@@ -65,7 +53,7 @@ def data_processing(dfr):
         filter.append(preprocess_text(text1))
     dfr['filtered']=filter
 
-    tfidf_model = pd.read_pickle('models/tdidf1.pkl')
+    tfidf_model = pd.read_pickle('models/tfidf1.pkl')
     x = tfidf_model.transform(dfr['filtered'])
 
     return x
