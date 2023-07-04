@@ -25,6 +25,11 @@ TaichungLoc = (24.086310772481895, 120.69548929568965)
 lat = TaipeiLoc[0]
 lng = TaipeiLoc[1]
 
+if (lat != TaipeiLoc[0]) | (lng != TaipeiLoc[1]): #不在台北
+    print("1")
+else:
+    print("HaHa")
+
 # 找台北餐廳
 # df = findRestaurant(lat, lng)
 # 找台中餐廳

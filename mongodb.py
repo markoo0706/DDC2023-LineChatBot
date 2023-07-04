@@ -24,7 +24,7 @@ class mongoDB():
                     "photo_refernce" : df[resName]['photo_refernce'],
                     "rating" : df[resName]["rating"],
                     "open_hour" : df[resName]["open_hour"],
-                    "review" : df[resName]["review"]
+                    #"review" : df[resName]["review"]
                 })
         return
     # 把收藏餐廳丟入收藏資料庫
@@ -35,11 +35,6 @@ class mongoDB():
             self.DB["favorite"].insert_one({
                     "resName" : resName,
                     "user" : userId,
-                    "place_id" : df[resName]["place_id"],
-                    "lat" : df[resName]["lat"],
-                    "lng" : df[resName]["lng"],
-                    "address" : df[resName]["address"],
-                    "rating" : df[resName]["rating"]
                 })
         return
     def show_favo_rest(self, userId): 
@@ -54,13 +49,22 @@ class mongoDB():
     def delete_collection(self, colName):
         result = self.DB[colName].delete_many({})
     def show_colleciton(self, colName):
-        print(self.DB[colName].count_documents({}))
+        cursor = self.DB[colName].find({})
+        for document in cursor:
+            print(document)     
     def clear_all_DB(self): # 刪除資料庫中所有資料
         self.favDB.delete_many({})
         self.penDB.delete_many({})
         self.resDB.delete_many({})
         self.recDB.delete_many({})
-
+    def collection_to_df(self, colName):
+        data = self.DB[colName].find()
+        data_list = [record for record in data]
+        df = pd.DataFrame(data_list)
+        return df
+    def close_connection(self):
+        self.client.close()
+    
 def Test(): # 測試函數
     lat = 25.020859 
     lng = 121.542776
@@ -71,14 +75,15 @@ def Test(): # 測試函數
     mydb.add_favo_rest(df, 123, list(df.keys())[1])
     mydb.add_favo_rest(df, 123, list(df.keys())[2])
     document = mydb.show_favo_rest(123)
-    for instance in document:
-        print(instance['resName'])
+    # for instance in document:
+        # print(instance)
     # for resName in [i for i in df.keys()]:
     #     mydb.add_rest_info("restaruant", df, resName)
-    # mydb.show_colleciton("restaruant")
-    
-    # mydb.delete_collection("restaruant")
-    # mydb.delete_collection("favorite")
+    print(mydb.collection_to_df("favorite"))
+    mydb.show_colleciton("restaruant")
+    mydb.show_colleciton("favorite")
+    mydb.delete_collection("restaruant")
+    mydb.delete_collection("favorite")
+    mydb.close_connection()
 
-
-# Test()測試函數
+Test()

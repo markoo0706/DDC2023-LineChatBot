@@ -5,3 +5,6 @@ pandas
 requests
 googlemaps
 scikit-learn
+zhon
+jieba
+hanziconv

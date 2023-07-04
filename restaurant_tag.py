@@ -49,7 +49,6 @@ def data_processing(dfr):
 
     with open("models/stopwords_zh-tw.txt", encoding="utf-8") as fin:
         stopwords = fin.read().split("\n")[1:]
-
     tokenized=[]
     for i in range(len(dfr['text'])):
         s_to= HanziConv.toSimplified(dfr['text'][i])
@@ -65,8 +64,9 @@ def data_processing(dfr):
         filter.append(preprocess_text(text1))
     dfr['filtered']=filter
 
-    tfidf_model = pd.read_pickle('models/tdidf1.pkl')
-    x = tfidf_model.transform(dfr['filtered'])
+    # tfidf_model = pd.read_pickle('models/tdidf1.pkl')
+    vectorizer = pickle.load(open("models/tfidf1.pkl", "rb"))
+    x = vectorizer.transform(dfr['filtered'])
 
     return x
 
