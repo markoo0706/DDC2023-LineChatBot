@@ -1,4 +1,4 @@
-import geopy
+from geopy.distance import geodesic
 import requests
 import json
 
@@ -9,6 +9,6 @@ def getTypeApi():
 
 def getType(lat, lng):
   recommend_list = getTypeApi()
-  dist_list = [[geopy.distance.geodesic((lat, lng), (x['lat'], x['lng'])).km, x['recommend']] for x in recommend_list]
-  type = min(dist)[1].split()
+  dist_list = [[geodesic((lat, lng), (x['lat'], x['lng'])).km, x['recommend']] for x in recommend_list]
+  type = min(dist_list)[1].split()
   return type[0][2:], type[1][2:], type[2][2:]
