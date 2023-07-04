@@ -45,7 +45,9 @@ resInfo1 = ['亞廬義大利窯烤吃到飽餐廳', '月之義大利餐廳', '�
 resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶樓', '阿玉水餃 (生水餃專賣店)', '紅豆食府 遠企店', '恬園餐廳 - 福華國際文教會館', '溫州大餛飩', '涮八方紫銅鍋', '瑞安豆漿大王', '阿英海產粥', '蔣記家薌麵', '熱翻天生猛海鮮', '忠誠山東蔥油餅 - 此燈亮有餅', '小李子蘭州牛肉拉麵館', '大連風味館', '龍門客棧餃子館 瑞安店', '老龍牛肉麵大王', '花麻辣 麻辣鴛鴦 沙茶火鍋', '小辣椒魷魚羹', '三顧茅廬台北四維店', '八方雲集 (師院店)', '通化街米粉湯50年老店（胡記復興旗艦店）','鳳城燒臘粵菜']
 resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
 
-
+def getInfo(df, resname, resType):
+    info = [name for name in resname if resType in df[name]["type"][0]]
+    return info
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
     recommend_list = json.loads(r.text)
@@ -254,12 +256,12 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):
-        global lat, lng # 把lat, lng, df 設為global 
+        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName# 把lat, lng, df 設為global 
         lat = event.message.latitude
         lng = event.message.longitude
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
-        # 3. 對附近餐廳進行分類 -> restInfo1, resInfo2, resInfo3, otherResName
+        resInfo1, resInfo2, resInfo3 = getInfo(resType1), getInfo(resType2), getInfo(resInfo3)
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
                                     template=ButtonsTemplate(
