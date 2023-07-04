@@ -46,7 +46,7 @@ resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶�
 resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
 
 def getInfo(df, resname, resType):
-    info = [name for name in resname if resType in df[name]["type"][0]]
+    info = [name for name in resname if resType in df[name]["type"]]
     return info
 
 def getTypeApi():
