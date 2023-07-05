@@ -104,7 +104,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3
+    global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName
     if event.message.text == "開始":
         buttons_template_message = TemplateSendMessage(
                 alt_text="分享目前位置",
@@ -129,7 +129,7 @@ def handle_text_message(event):
             )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
-            msg = "附近無該類別餐廳，請選擇其他類別"
+            msg = "提醒：附近無該類別餐廳，請選擇其他類別"
             message = TextSendMessage(text=msg)
             line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == resType2:
@@ -140,7 +140,7 @@ def handle_text_message(event):
             )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
-            msg = "附近無該類別餐廳，請選擇其他類別"
+            msg = "提醒：附近無該類別餐廳，請選擇其他類別"
             message = TextSendMessage(text=msg)
             line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == resType3:
@@ -151,7 +151,7 @@ def handle_text_message(event):
             )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
-            msg = "附近無該類別餐廳，請選擇其他類別"
+            msg = "提醒：附近無該類別餐廳，請選擇其他類別"
             message = TextSendMessage(text=msg)
             line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "其他類別":
@@ -162,7 +162,7 @@ def handle_text_message(event):
             )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
-            msg = "附近無該類別餐廳，請選擇其他類別"
+            msg = "提醒：附近無該類別餐廳，請選擇其他類別"
             message = TextSendMessage(text=msg)
             line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "返回選單":
