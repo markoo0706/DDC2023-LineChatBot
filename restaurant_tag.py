@@ -11,6 +11,11 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import joblib
 
+with open("models/stopwords_zh-tw.txt", encoding="utf-8") as fin:
+    STOPWORDS = fin.read().split("\n")[1:]
+VECTORIZER = pickle.load(open("models/tfidf1.pkl", "rb"))
+TAG_SVC = joblib.load('models/tag_svc_model')
+
 def remove_stopwords(text, stopwords):
     # 移除停用詞
     words = text.split(' ')
@@ -34,9 +39,10 @@ def preprocess_text(text):
     return text
 
 def data_processing(dfr):
-
-    with open("models/stopwords_zh-tw.txt", encoding="utf-8") as fin:
-        stopwords = fin.read().split("\n")[1:]
+    global STOPWORDS, VECTORIZER
+    
+    # with open("models/stopwords_zh-tw.txt", encoding="utf-8") as fin:
+    #     stopwords = fin.read().split("\n")[1:]
     tokenized=[]
     for i in range(len(dfr['text'])):
         s_to= HanziConv.toSimplified(dfr['text'][i])
@@ -48,13 +54,12 @@ def data_processing(dfr):
 
     filter = []
     for text in dfr['tokenized']:
-        text1 = remove_stopwords(text, stopwords)
+        text1 = remove_stopwords(text, STOPWORDS)
         filter.append(preprocess_text(text1))
     dfr['filtered']=filter
 
-    # tfidf_model = pd.read_pickle('models/tdidf1.pkl')
-    vectorizer = pickle.load(open("models/tfidf1.pkl", "rb"))
-    x = vectorizer.transform(dfr['filtered'])
+    # vectorizer = pickle.load(open("models/tfidf1.pkl", "rb"))
+    x = VECTORIZER.transform(dfr['filtered'])
 
     return x
 
@@ -63,8 +68,8 @@ def run_classification(raw, name):
     df = df[['text']]
     df['text'] = df['text'] + name
     x = data_processing(df)
-    loaded_model = joblib.load('models/tag_svc_model')
-    result = loaded_model.predict(x)
+    # loaded_model = joblib.load('models/tag_svc_model')
+    result = TAG_SVC.predict(x)
     tag_dict = { 0:"中式料理", 1:"其他料理", 2:"台式料理", 3:"日式料理", 4:"法式料理", 5:"泰式料理", 6:"美式料理", 7:"義式料理", 8:"韓式料理"}
     tag = []
     for i in result:
