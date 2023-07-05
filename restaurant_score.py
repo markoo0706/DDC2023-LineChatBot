@@ -7,25 +7,28 @@ def restaurant_score(rest_dict):
     f_word, s_word, h_word, c_word =[], [], [], []
     # each restaurant
     for c in range(5):
-      comment = rest_dict[key]['review'][c]['text'].lower()
-      # each comment
-      for i in range(1, df.shape[0]):
-        if df['food'][i] != '' and comment.count(df['food'][i]) > 0:
-          food_score += df['food_score'][i]
-          f_word.append(df['food'][i])
-          # print('food',df['food'][i])
-        if df['service'][i] != '' and comment.count(df['service'][i]) > 0:
-          service_score += df['service_score'][i]
-          # print('service',df['service'][i])
-          s_word.append(df['service'][i])
-        if df['hygiene'][i] != '' and comment.count(df['hygiene'][i]) > 0:
-          hygiene_score+= df['hygiene_score'][i]
-          # print('hygiene',df['hygiene'][i])
-          h_word.append(df['hygiene'][i])
-        if df['c_p_chi'][i] != '' and comment.count(df['c_p_chi'][i]) > 0:
-          cp_score += df['food_score'][i]
-          # print('c_p_chi',df['c_p_chi'][i])
-          c_word.append(df['c_p_chi'][i])
+      try:
+        comment = rest_dict[key]['review'][c]['text'].lower()
+        # each comment
+        for i in range(1, df.shape[0]):
+          if df['food'][i] != '' and comment.count(df['food'][i]) > 0:
+            food_score += df['food_score'][i]
+            f_word.append(df['food'][i])
+            # print('food',df['food'][i])
+          if df['service'][i] != '' and comment.count(df['service'][i]) > 0:
+            service_score += df['service_score'][i]
+            # print('service',df['service'][i])
+            s_word.append(df['service'][i])
+          if df['hygiene'][i] != '' and comment.count(df['hygiene'][i]) > 0:
+            hygiene_score+= df['hygiene_score'][i]
+            # print('hygiene',df['hygiene'][i])
+            h_word.append(df['hygiene'][i])
+          if df['c_p_chi'][i] != '' and comment.count(df['c_p_chi'][i]) > 0:
+            cp_score += df['food_score'][i]
+            # print('c_p_chi',df['c_p_chi'][i])
+            c_word.append(df['c_p_chi'][i])
+      except:
+        break
     # print('food', food_score, 'service', service_score, 'hygiene', hygiene_score, 'cp', cp_score)
     rest_dict[key]['food_score'] = food_score
     rest_dict[key]['service_score'] = service_score
