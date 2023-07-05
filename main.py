@@ -122,30 +122,49 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
     
     elif event.message.text == resType1:
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template = generate_carousel(resInfo1)
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
-
+        if len(resInfo1) != 0: # 推薦種類一餐廳名單不為空值
+            buttons_template_message = TemplateSendMessage(
+                alt_text='CarouselTemplate',
+                template = generate_carousel(resInfo1)
+            )
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        else:
+            msg = "附近無該類別餐廳，請選擇其他類別"
+            message = TextSendMessage(text=msg)
+            line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == resType2:
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template = generate_carousel(resInfo2)
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        if len(resInfo2) != 0: # 推薦種類一餐廳名單不為空值
+            buttons_template_message = TemplateSendMessage(
+                alt_text='CarouselTemplate',
+                template = generate_carousel(resInfo2)
+            )
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        else:
+            msg = "附近無該類別餐廳，請選擇其他類別"
+            message = TextSendMessage(text=msg)
+            line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == resType3:
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template = generate_carousel(resInfo3)
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        if len(resInfo3) != 0:
+            buttons_template_message = TemplateSendMessage(
+                alt_text='CarouselTemplate',
+                template = generate_carousel(resInfo3)
+            )
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        else:
+            msg = "附近無該類別餐廳，請選擇其他類別"
+            message = TextSendMessage(text=msg)
+            line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "其他類別":
-        buttons_template_message = TemplateSendMessage(
-            alt_text='CarouselTemplate',
-            template = generate_carousel(otherResName)
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        if len(otherResName) != 0:
+            buttons_template_message = TemplateSendMessage(
+                alt_text='CarouselTemplate',
+                template = generate_carousel(otherResName)
+            )
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        else:
+            msg = "附近無該類別餐廳，請選擇其他類別"
+            message = TextSendMessage(text=msg)
+            line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "返回選單":
         buttons_template_message = TemplateSendMessage(
                                     alt_text='ButtonsTemplate',
