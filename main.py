@@ -316,7 +316,7 @@ def handle_loc_message(event):
         lng = event.message.longitude
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
-        resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resInfo3)
+        resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resType3)
         otherResName = [i for i in list(df.keys()) if i not in (resInfo1 + resInfo2 + resInfo3)]
         # msg = resType1 + resType2 + resType3
         # message = TextSendMessage(text=msg)
