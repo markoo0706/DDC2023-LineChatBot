@@ -200,7 +200,6 @@ def handle_text_message(event):
         message = TextSendMessage(text=msg)
         line_bot_api.reply_message(event.reply_token,message)
     elif event.message.text == "範例地點：台中":
-        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df
         TaichungLoc = (24.086310772481895, 120.69548929568965)
         df = findRestaurant(TaichungLoc[0], TaichungLoc[1]) 
         resname = [i for i in df.keys()] # 餐廳名稱(df.keys)的 List
@@ -251,7 +250,6 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
         return
     elif event.message.text == "範例地點：台北":
-        global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df
         TaipeiLoc = (25.020859, 121.542776)
         text_message = TextSendMessage(text='尋找餐廳中，請稍等約5~10秒。')
         line_bot_api.reply_message(event.reply_token, text_message)
