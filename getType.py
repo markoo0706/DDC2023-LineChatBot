@@ -16,3 +16,7 @@ def getType(lat, lng):
   resType2 = x[8:12]
   resType3 = x[14:18]
   return resType1, resType2, resType3
+
+def getInfo(df, resname, resType):
+    info = [name for name in resname if resType in df[name]["type"]]
+    return info

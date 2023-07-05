@@ -8,7 +8,7 @@ from mongodb import mongoDB
 from recommmendation_system import Recommendation
 import requests
 import json
-from getType import getType
+from getType import getType, getInfo
 
 # ========================================= 初始變數 ========================================= 
 
@@ -47,9 +47,6 @@ resInfo2 = ['莫宰羊-大安台大店', '小李子清粥小菜', '北平同慶�
 resInfo3 = ['鐵匠 鉄板居酒屋 TEPPAN IZAKAYA TESSHO', '爭鮮迴轉壽司 科技店', '角屋關東煮', 'ibuki 日本料理餐廳 -台北遠東香格里拉', '禾豐日式涮涮鍋']
 otherResName = [i for i in list(df.keys()) if i not in (resInfo1 + resInfo2 + resInfo3)]
 
-def getInfo(df, resname, resType):
-    info = [name for name in resname if resType in df[name]["type"]]
-    return info
 
 def getTypeApi():
     r = requests.get("https://testapi.zeabur.app/result")
