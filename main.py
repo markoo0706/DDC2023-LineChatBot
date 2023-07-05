@@ -309,13 +309,11 @@ def handle_text_message(event):
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_loc_message(event):
+        # text_message = TextSendMessage(text='尋找餐廳中，請稍等約5~10秒。')
+        # line_bot_api.reply_message(event.reply_token, text_message)
         global resType1, resType2, resType3, resInfo1, resInfo2, resInfo3, otherResName, df# 把lat, lng, df 設為global 
         lat = event.message.latitude
         lng = event.message.longitude
-
-        text_message = TextSendMessage(text='尋找餐廳中，請稍等。')
-        line_bot_api.reply_message(event.reply_token, text_message)
-
         df = findRestaurant(lat, lng) # 爬取餐廳資料
         resType1, resType2, resType3 = getType(lat, lng) # 獲取推薦類別
         resInfo1, resInfo2, resInfo3 = getInfo(df, list(df.keys()), resType1), getInfo(df, list(df.keys()), resType2), getInfo(df, list(df.keys()), resInfo3)
