@@ -14,7 +14,7 @@ import time
 from restaurant_tag import run_classification
 from restaurant_score import restaurant_score
 
-PLACE_API_KEY = 'AIzaSyAfxiZ36COzkAF__lM05Er6teR2fYMmZog'
+# PLACE_API_KEY = "你的Place_API_Key"
 
 def findNearBy(lat, lng, radius = 1000, PLACE_API_KEY = PLACE_API_KEY):
   url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+str(lat)+','+str(lng)+'&radius='+str(radius)+'&type=restaurant&language=zh-TW&key='+PLACE_API_KEY
