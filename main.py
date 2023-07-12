@@ -13,8 +13,8 @@ from getFunc import getType, getInfo
 # ========================================= 初始變數 ========================================= 
 
 #line token
-channel_access_token = 'fkoo8cmH1C29XiX7vKOqcXa3fJ5wpcHDZkkMw9Y6v7sxhIeT2QZW/VoE1legG4KY6ZaxTXjgtjKc9M9hyZ6oI+KlGbyUUQejNB17GKyMNrQcMwEHpSq7kI0ibsYn6bZO33jExHJ30qGPd+cXp8G6tgdB04t89/1O/w1cDnyilFU='
-channel_secret = '14a2ec07a0be3dceff5b6cefcbf60b03'
+# channel_access_token = "請輸入access_tocken"
+# channel_secret = '請輸入channel_secret'
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
