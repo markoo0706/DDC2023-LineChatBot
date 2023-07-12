@@ -69,7 +69,7 @@ def Test(): # 測試函數
     lat = 25.020859 
     lng = 121.542776
     df = findRestaurant(lat, lng)
-    key = 'mongodb://mongo:463R2dK98HNM@infra.zeabur.com:30774'
+    # key = 'your mongoDB key'
     mydb = mongoDB(key)
     mydb.add_favo_rest(df, 123, list(df.keys())[0]) 
     mydb.add_favo_rest(df, 123, list(df.keys())[1])
