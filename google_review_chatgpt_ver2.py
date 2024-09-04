@@ -11,7 +11,7 @@ import requests
 import time
 import pickle
 
-def getGoogleCommentChatGPTLabel(restaurant_info, MY_API_KEY = "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"):
+def getGoogleCommentChatGPTLabel(restaurant_info, MY_API_KEY = "":
   API_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
   for key in restaurant_info.keys():
     # set question text
@@ -46,7 +46,7 @@ def getGoogleCommentChatGPTLabel(restaurant_info, MY_API_KEY = "sk-vegUbuG6MjImA
     break
   return restaurant_info
 
-def getGoogleCommentChatGPTAspect(restaurant_info, MY_API_KEY = "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"):
+def getGoogleCommentChatGPTAspect(restaurant_info, MY_API_KEY = ""):
   API_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
   for key in list(restaurant_info.keys())[45:]:
     print(key)
